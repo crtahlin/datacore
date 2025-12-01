@@ -144,11 +144,7 @@ Each team space has its own `CLAUDE.md` with team-specific context.
 
 Modules add specialized functionality (trading, research, etc.).
 
-### Available Modules
-
-| Module | Purpose | Repo |
-|--------|---------|------|
-| trading | Trading workflows and analysis | datacore-one/datacore-trading |
+**See [.datacore/CATALOG.md](.datacore/CATALOG.md) for full list of available modules and space templates.**
 
 ### Install a Module
 
