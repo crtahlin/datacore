@@ -111,6 +111,13 @@ cp install.yaml.example install.yaml
 - Installing modules
 - Configuring Emacs and Obsidian
 
+## Documentation
+
+- [docs/](docs/) - Full documentation
+  - [Commands Reference](docs/commands.md)
+  - [Agents Reference](docs/agents.md)
+  - [Modules](docs/modules.md)
+
 ## Requirements
 
 - [Claude Code](https://claude.ai/code) - AI coding assistant
