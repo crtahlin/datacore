@@ -246,7 +246,7 @@ Migration script provided in implementation.
 ### Phase 3: Tooling (In Progress)
 - [ ] Add `datacore context` CLI commands
 - [x] Create pre-commit hooks
-- [ ] Add CI validation workflow
+- [x] Add CI validation workflow
 
 ### Phase 4: Documentation
 - [ ] Update INSTALL.md
