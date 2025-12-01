@@ -16,13 +16,13 @@
 
 ## Summary
 
-A universal pattern for managing context files (CLAUDE.md, agents, commands) across four permission levels (PUBLIC, ORG, TEAM, PRIVATE) that facilitates contributions while protecting privacy.
+A universal pattern for managing context files (CLAUDE.md, agents, commands) with clear separation between PUBLIC (shareable) and PRIVATE (personal) content. Facilitates contributions while protecting privacy.
 
 ## Motivation
 
 Datacore needs to:
 1. Enable 1000s of users to contribute improvements back to the system
-2. Protect private/sensitive information at multiple levels
+2. Protect private/sensitive information
 3. Apply consistent patterns across all components (repos, modules, agents, commands)
 4. Facilitate automatic learning through PRs
 
@@ -30,14 +30,21 @@ Current approach mixes public and private content, making contribution difficult
 
 ## Specification
 
-### Permission Levels
+### Core Layers (Currently Implemented)
 
 | Level | Suffix | Visibility | Git Tracking | PR Target |
 |-------|--------|------------|--------------|-----------|
 | PUBLIC | `.base.md` | Everyone | Tracked | Upstream repo |
+| PRIVATE | `.local.md` | Only user | Never | None |
+
+### Future Layers (Reserved)
+
+| Level | Suffix | Visibility | Git Tracking | PR Target |
+|-------|--------|------------|--------------|-----------|
 | ORG | `.org.md` | Organization | Tracked in fork | Org's fork |
 | TEAM | `.team.md` | Team members | Optional | Team repo |
-| PRIVATE | `.local.md` | Only user | Never | None |
+
+> **Note**: ORG and TEAM layers are reserved for future use when spaces support multiple teams.
 
 ### File Structure
 
@@ -45,22 +52,18 @@ Every configurable component follows this pattern:
 
 ```
 [component]/
-├── [NAME].base.md          # PUBLIC - generic template
-├── [NAME].org.md           # ORG - org customizations
-├── [NAME].team.md          # TEAM - team additions
-├── [NAME].local.md         # PRIVATE - personal notes
-└── [NAME].md               # Composed (gitignored)
+├── [NAME].base.md          # PUBLIC - generic template (tracked)
+├── [NAME].local.md         # PRIVATE - personal notes (gitignored)
+└── [NAME].md               # Composed output (gitignored)
 ```
 
 ### Composition
 
-Files are merged in order (later overrides/extends earlier):
+Files are merged in order (later extends earlier):
 
 ```
-[NAME].base.md      # Layer 1: System defaults
-  + [NAME].org.md   # Layer 2: Org customizations
-  + [NAME].team.md  # Layer 3: Team additions
-  + [NAME].local.md # Layer 4: Personal notes
+[NAME].base.md      # Layer 1: System defaults (PUBLIC)
+  + [NAME].local.md # Layer 2: Personal notes (PRIVATE)
   ─────────────────
   = [NAME].md       # Output: Complete context
 ```
@@ -101,12 +104,8 @@ Standard `.gitignore` for all components:
 # Composed output - generated at runtime
 CLAUDE.md
 
-# Team layer - optional tracking
-# *.team.md  # Uncomment if team uses separate repo
-
-# Tracked (PUBLIC + ORG):
+# PUBLIC layer is tracked:
 # *.base.md
-# *.org.md
 ```
 
 ### Contribution Flow
@@ -116,40 +115,31 @@ User improves something
         │
         ├─► Generic improvement ──► Edit .base.md ──► PR to upstream
         │
-        ├─► Org-specific ──► Edit .org.md ──► Commit to fork
-        │
-        ├─► Team-specific ──► Edit .team.md ──► Share with team
-        │
         └─► Personal ──► Edit .local.md ──► Stays local
 ```
 
 ### Auto-PR Triggers
 
-When `.base.md` or `.org.md` changes:
+When `.base.md` changes:
 
-1. **Pre-commit hook** checks classification
-2. **CI workflow** validates no private content in public layers
+1. **Pre-commit hook** validates no private content
+2. **CI workflow** validates no private content in PUBLIC layer
 3. **Optional**: Auto-create draft PR to upstream
 
 ### Example: Trading Module
 
 ```
 .datacore/modules/trading/
-├── CLAUDE.base.md              # Generic trading methodology
+├── CLAUDE.base.md              # Generic trading methodology (PUBLIC)
 │   └── "Position sizing rules, risk management..."
-├── CLAUDE.org.md               # Org's trading focus
-│   └── "We focus on crypto perpetuals..."
-├── CLAUDE.team.md              # Team preferences
-│   └── "Preferred exchanges: Binance, Bybit..."
-├── CLAUDE.local.md             # Personal settings
+├── CLAUDE.local.md             # Personal settings (PRIVATE)
 │   └── "My risk tolerance: 2% per trade..."
 └── CLAUDE.md                   # Composed (gitignored)
     └── [All layers merged]
 
 ├── agents/
-│   ├── position-manager.base.md    # Generic agent
-│   ├── position-manager.org.md     # Org risk limits
-│   ├── position-manager.local.md   # My thresholds
+│   ├── position-manager.base.md    # Generic agent (PUBLIC)
+│   ├── position-manager.local.md   # My thresholds (PRIVATE)
 │   └── position-manager.md         # Composed
 ```
 
@@ -162,8 +152,6 @@ def merge_context(component_path: str, name: str = "CLAUDE") -> str:
     """Merge layered context files into single output."""
     layers = [
         f"{name}.base.md",   # PUBLIC
-        f"{name}.org.md",    # ORG
-        f"{name}.team.md",   # TEAM
         f"{name}.local.md",  # PRIVATE
     ]
 
@@ -187,7 +175,7 @@ datacore context rebuild
 # Regenerate specific component
 datacore context rebuild --path .datacore/modules/trading
 
-# Validate no private content in public layers
+# Validate no private content in PUBLIC layer
 datacore context validate
 
 # Show which layer a section comes from
@@ -196,10 +184,10 @@ datacore context trace "Position Sizing"
 
 ## Rationale
 
-**Why four levels?**
-- Maps to common organizational structures (self, team, org, world)
-- Matches privacy-policy.md classification (PRIVATE, TEAM, ORG, PUBLIC)
-- Provides granular control without complexity
+**Why two levels (PUBLIC/PRIVATE)?**
+- Simplest model that solves the core problem
+- Clear mental model: "shareable" vs "personal"
+- ORG/TEAM layers reserved for future multi-team spaces
 
 **Why file-based (not section-based)?**
 - Easier to enforce gitignore rules
@@ -219,19 +207,18 @@ Migration from current pattern:
 | Current | New |
 |---------|-----|
 | `CLAUDE.template.md` | `CLAUDE.base.md` |
-| `CLAUDE.md` (tracked) | `CLAUDE.org.md` |
 | `CLAUDE.md` (local) | `CLAUDE.local.md` |
 
 Migration script provided in implementation.
 
 ## Security Considerations
 
-1. **CI validation** - PRs checked for private content patterns
-2. **Pre-commit hooks** - Warn if `.local.md` staged
+1. **CI validation** - PRs checked for private content patterns in `.base.md`
+2. **Pre-commit hooks** - Validates `.base.md` before commit
 3. **Gitignore enforcement** - `.local.md` always ignored
 4. **Content scanning** - Detect PII, secrets, sensitive patterns
 
-### Private Content Patterns (blocked in public layers)
+### Private Content Patterns (blocked in PUBLIC layer)
 
 ```regex
 # Personal identifiers
@@ -243,36 +230,32 @@ Migration script provided in implementation.
 
 # Financial
 /\$[\d,]+\.\d{2}/  # Dollar amounts
-/position|P&L|balance/i  # Trading specifics
 ```
 
 ## Implementation
 
-### Phase 1: Core Pattern
-- [ ] Create `context_merge.py` utility
-- [ ] Update `.gitignore` templates
-- [ ] Create migration script
+### Phase 1: Core Pattern (Complete)
+- [x] Create `context_merge.py` utility
+- [x] Update `.gitignore` templates
+- [x] Create pre-commit hooks
 
-### Phase 2: Apply to Repos
-- [ ] Update `datacore` repo
-- [ ] Update `datacore-org` template
-- [ ] Update `datacore-trading` module
+### Phase 2: Apply to Repos (Complete)
+- [x] Update `datacore` repo
+- [x] Update `datacore-org` template
 
-### Phase 3: Tooling
-- [ ] Add `datacore context` commands
-- [ ] Create pre-commit hooks
+### Phase 3: Tooling (In Progress)
+- [ ] Add `datacore context` CLI commands
+- [x] Create pre-commit hooks
 - [ ] Add CI validation workflow
 
 ### Phase 4: Documentation
 - [ ] Update INSTALL.md
 - [ ] Update CONTRIBUTING.md
-- [ ] Add examples to CATALOG.md
 
 ## Open Questions
 
-1. Should `.team.md` be tracked by default or opt-in?
-2. How to handle merge conflicts between layers?
-3. Should composed files include layer markers for debugging?
+1. How to handle merge conflicts between layers?
+2. Should composed files include layer markers for debugging? (Currently: yes)
 
 ## References
 

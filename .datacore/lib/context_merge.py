@@ -4,9 +4,11 @@ Layered Context Merge Utility
 
 Merges context files across permission levels:
 - .base.md   (PUBLIC)  - Generic template, PRable to upstream
-- .org.md    (ORG)     - Organization customizations, tracked in fork
-- .team.md   (TEAM)    - Team-specific additions, optionally tracked
-- .local.md  (PRIVATE) - Personal notes, always gitignored
+- .local.md  (PRIVATE) - Personal customizations, always gitignored
+
+Future extensions (not currently used):
+- .org.md    (ORG)     - Organization customizations
+- .team.md   (TEAM)    - Team-specific additions
 
 Output: Composed .md file (gitignored, read at runtime)
 
@@ -20,14 +22,18 @@ from pathlib import Path
 from typing import Optional
 
 # Layer order (later layers extend/override earlier)
+# Currently only PUBLIC and PRIVATE are actively used
 LAYERS = [
-    ("base", "PUBLIC"),
-    ("org", "ORG"),
-    ("team", "TEAM"),
-    ("local", "PRIVATE"),
+    ("base", "PUBLIC"),    # Generic template - validated for private content
+    ("org", "ORG"),        # Future: org customizations
+    ("team", "TEAM"),      # Future: team additions
+    ("local", "PRIVATE"),  # Personal - always gitignored, never validated
 ]
 
-# Patterns that should never appear in public/org layers
+# Layers that should be validated for private content (only PUBLIC for now)
+VALIDATED_LAYERS = ("PUBLIC",)
+
+# Patterns that should never appear in PUBLIC layers
 PRIVATE_PATTERNS = [
     # Email addresses
     (r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', 'email address'),
@@ -76,8 +82,8 @@ def merge_context(
 
         layer_content = layer_file.read_text()
 
-        # Validate public/org layers for private content
-        if validate and layer_level in ("PUBLIC", "ORG"):
+        # Validate PUBLIC layer for private content
+        if validate and layer_level in VALIDATED_LAYERS:
             for pattern, description in PRIVATE_PATTERNS:
                 matches = re.findall(pattern, layer_content)
                 if matches:
@@ -143,7 +149,7 @@ def rebuild_context(
 
 def validate_layers(component_path: Path, name: str = "CLAUDE") -> list[str]:
     """
-    Validate that public/org layers don't contain private content.
+    Validate that PUBLIC layer doesn't contain private content.
 
     Returns:
         List of validation errors

@@ -2,7 +2,7 @@
 #
 # Pre-commit hook for Datacore layered context validation (DIP-0002)
 #
-# Validates that public layers (.base.md, .org.md) don't contain private content
+# Validates that PUBLIC layer (.base.md) doesn't contain private content
 # before allowing commit.
 #
 # Installation:
@@ -29,15 +29,15 @@ if [ -z "$MERGE_SCRIPT" ]; then
     exit 0
 fi
 
-# Get list of staged .base.md and .org.md files
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(base|org)\.md$' || true)
+# Get list of staged .base.md files (PUBLIC layer only)
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.base\.md$' || true)
 
 if [ -z "$STAGED_FILES" ]; then
-    # No relevant files staged
+    # No PUBLIC layer files staged
     exit 0
 fi
 
-echo "Validating context layers for private content..."
+echo "Validating PUBLIC layer (.base.md) for private content..."
 
 # Check each file's directory
 DIRS_TO_CHECK=$(echo "$STAGED_FILES" | xargs -I{} dirname {} | sort -u)
@@ -47,7 +47,7 @@ for dir in $DIRS_TO_CHECK; do
     # Get the base name (CLAUDE, agent name, etc.)
     for file in $STAGED_FILES; do
         if [[ "$(dirname "$file")" == "$dir" ]]; then
-            base_name=$(basename "$file" | sed 's/\.\(base\|org\)\.md$//')
+            base_name=$(basename "$file" | sed 's/\.base\.md$//')
 
             # Run validation
             if ! python "$MERGE_SCRIPT" validate --path "$REPO_ROOT/$dir" --name "$base_name" 2>&1; then
@@ -59,10 +59,10 @@ done
 
 if [ $FAILED -eq 1 ]; then
     echo ""
-    echo "Commit blocked: Private content detected in public layer(s)"
+    echo "Commit blocked: Private content detected in PUBLIC layer (.base.md)"
     echo "Move private content to .local.md files before committing"
     exit 1
 fi
 
-echo "Context validation passed"
+echo "Validation passed"
 exit 0
