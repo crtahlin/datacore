@@ -71,8 +71,8 @@ Read all sub-tasks under project:
 
 **In project notes:**
 ```
-Look for: /Users/gregor/Data/notes/1-active/[category]/[Project Name].md
-Or: /Users/gregor/Data/notes/pages/[Project Name].md
+Look for: ~/Data/notes/1-active/[category]/[Project Name].md
+Or: ~/Data/notes/pages/[Project Name].md
 Read existing project documentation
 ```
 
@@ -152,7 +152,7 @@ Suggested action: Review with user which tasks are MVP vs nice-to-have
 
 Create or update project note:
 
-**Output Location:** `/Users/gregor/Data/notes/1-active/[category]/`
+**Output Location:** `~/Data/notes/1-active/[category]/`
 
 **Filename:** `[Project Name].md`
 - Example: `Verity MVP Project.md`
@@ -326,7 +326,7 @@ Return structured JSON to ai-task-executor:
 ```json
 {
   "status": "completed",
-  "output_path": "/Users/gregor/Data/notes/1-active/verity/Verity MVP Project.md",
+  "output_path": "~/Data/notes/1-active/verity/Verity MVP Project.md",
   "summary": "Updated Verity MVP project status. 8/15 tasks complete (53%). 2 blockers identified: CTO API spec (12 days) and design review (5 days). Project timeline at risk.",
   "review_notes": "Project behind schedule by ~2 weeks. Two high-priority blockers need escalation. Consider descoping features 7-9 to hit target date.",
   "project_health": {
@@ -360,7 +360,7 @@ Return structured JSON to ai-task-executor:
 ```json
 {
   "status": "needs_review",
-  "output_path": "/Users/gregor/Data/notes/1-active/datafund/Datafund Launch Campaign.md",
+  "output_path": "~/Data/notes/1-active/datafund/Datafund Launch Campaign.md",
   "summary": "Project status updated. Significant scope expansion detected (8 tasks → 18 tasks). Original timeline no longer realistic. User decision needed on priority/scope.",
   "review_notes": "Project scope increased 125% since start. Multiple valid paths forward.",
   "review_questions": [
@@ -510,11 +510,11 @@ Return structured JSON to ai-task-executor:
 **Reads From:**
 - Task from ai-task-executor (JSON input)
 - next_actions.org (PROJECT entries, sub-tasks)
-- Project notes: `/Users/gregor/Data/notes/1-active/`
-- Journals: `/Users/gregor/Data/notes/journals/`
+- Project notes: `~/Data/notes/1-active/`
+- Journals: `~/Data/notes/journals/`
 
 **Writes To:**
-- `/Users/gregor/Data/notes/1-active/[category]/[Project].md`
+- `~/Data/notes/1-active/[category]/[Project].md`
 - May add follow-up tasks to next_actions.org (via recommendations)
 
 **Returns To:**

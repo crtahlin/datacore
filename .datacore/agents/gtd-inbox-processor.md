@@ -18,8 +18,8 @@ You will receive a single inbox entry and must:
 
 - Full text of one inbox entry (heading + all content)
 - Line number where the entry starts in inbox.org
-- Path to inbox.org: `/Users/gregor/Data/org/inbox.org`
-- Path to next_actions.org: `/Users/gregor/Data/org/next_actions.org`
+- Path to inbox.org: `~/Data/org/inbox.org`
+- Path to next_actions.org: `~/Data/org/next_actions.org`
 
 ## Classification Framework
 
@@ -38,7 +38,7 @@ First, determine what type of item this is:
 
 **3. Reference Information** - No action, just information to keep
 - Pure reference material with no action needed
-- Consider creating a note in `/Users/gregor/Data/notes/pages/` instead
+- Consider creating a note in `~/Data/notes/pages/` instead
 - If keeping in next_actions.org, mark with `:reference:` tag
 
 ## Enhancement Protocol

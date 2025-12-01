@@ -71,7 +71,7 @@ No AI tasks completed overnight. The AI Task Executor is running continuously an
 
 ### Step 3: Read Today's Org-Mode Agenda
 
-Read `/Users/gregor/Data/org/next_actions.org` and extract:
+Read `~/Data/org/next_actions.org` and extract:
 - Tasks with SCHEDULED: <today's date>
 - Tasks with DEADLINE: <today's date>
 - Tasks with DEADLINE: <next 7 days> (show as "upcoming")
@@ -141,7 +141,7 @@ Items blocked on others:
 
 ### Step 6: Check Inbox Count
 
-Read `/Users/gregor/Data/org/inbox.org` and count items:
+Read `~/Data/org/inbox.org` and count items:
 
 ```
 ═══════════════════════════════════════════════════
@@ -231,7 +231,7 @@ User answers: ___
 
 ### Step 10: Morning Summary in Journal
 
-Write to `/Users/gregor/Data/notes/journals/[today].md`:
+Write to `~/Data/notes/journals/[today].md`:
 
 ```markdown
 ## GTD Daily Start - [Date]
@@ -286,12 +286,12 @@ Have a focused and productive day!
 ## Files to Reference
 
 **MUST READ:**
-- `/Users/gregor/Data/org/next_actions.org` (SCHEDULED, DEADLINE, NEXT, WAITING states)
-- `/Users/gregor/Data/org/inbox.org` (count items)
-- `/Users/gregor/Data/notes/journals/[today].md` (check AI completions, write summary)
+- `~/Data/org/next_actions.org` (SCHEDULED, DEADLINE, NEXT, WAITING states)
+- `~/Data/org/inbox.org` (count items)
+- `~/Data/notes/journals/[today].md` (check AI completions, write summary)
 
 **OPTIONAL:**
-- `/Users/gregor/Data/org/habits.org` (today's habits if needed)
+- `~/Data/org/habits.org` (today's habits if needed)
 
 ## Your Boundaries
 

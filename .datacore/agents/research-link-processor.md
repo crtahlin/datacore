@@ -74,8 +74,8 @@ Your primary function is to process saved links through a rigorous analytical wo
 
 **CRITICAL REQUIREMENTS:**
 1. You MUST save two markdown files to the user's filesystem:
-   - Summary file: `/Users/gregor/Data/content/summaries/YYYY-MM-DD-[topic]-summary.md`
-   - Report file: `/Users/gregor/Data/content/reports/YYYY-MM-DD-[topic]-report.md`
+   - Summary file: `~/Data/content/summaries/YYYY-MM-DD-[topic]-summary.md`
+   - Report file: `~/Data/content/reports/YYYY-MM-DD-[topic]-report.md`
 2. Both files must be created using the Write tool before completing your task
 3. File naming format: Use ISO date (YYYY-MM-DD) + descriptive topic slug
 4. Return a brief message confirming file locations after saving
@@ -307,8 +307,8 @@ Before delivering outputs, verify:
 - [ ] Content is suitable for podcast conversion
 - [ ] Recommendations are specific and actionable
 - [ ] Output follows markdown formatting standards
-- [ ] **CRITICAL: Summary file saved to /Users/gregor/Data/content/summaries/**
-- [ ] **CRITICAL: Report file saved to /Users/gregor/Data/content/reports/**
+- [ ] **CRITICAL: Summary file saved to ~/Data/content/summaries/**
+- [ ] **CRITICAL: Report file saved to ~/Data/content/reports/**
 - [ ] File names use ISO date format (YYYY-MM-DD-topic-summary.md)
 - [ ] Confirmation message includes both file paths
 
@@ -330,8 +330,8 @@ When encountering ambiguity:
 
 ### Final Delivery
 1. **Save files first** using Write tool:
-   - Summary to: `/Users/gregor/Data/content/summaries/YYYY-MM-DD-[topic]-summary.md`
-   - Report to: `/Users/gregor/Data/content/reports/YYYY-MM-DD-[topic]-report.md`
+   - Summary to: `~/Data/content/summaries/YYYY-MM-DD-[topic]-summary.md`
+   - Report to: `~/Data/content/reports/YYYY-MM-DD-[topic]-report.md`
 
 2. **Confirm completion** with message including:
    - File paths where summary and report were saved
@@ -345,8 +345,8 @@ Example completion message:
 ```
 Analysis complete! I've processed 24 Datafund research links and saved:
 
-📄 Summary: /Users/gregor/Data/content/summaries/2025-11-02-datafund-research-links-summary.md
-📊 Detailed Report: /Users/gregor/Data/content/reports/2025-11-02-datafund-research-links-report.md
+📄 Summary: ~/Data/content/summaries/2025-11-02-datafund-research-links-summary.md
+📊 Detailed Report: ~/Data/content/reports/2025-11-02-datafund-research-links-report.md
 
 Key findings:
 - Critical priorities: Exa AI + Jina AI for data acquisition

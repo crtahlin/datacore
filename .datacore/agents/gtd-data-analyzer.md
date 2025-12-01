@@ -60,18 +60,18 @@ Parsing data task...
 Based on task category and metrics, read from:
 
 **For GTD/Productivity Metrics:**
-- Journals: `/Users/gregor/Data/notes/journals/YYYY-MM-DD.md`
-- Org files: `/Users/gregor/Data/org/next_actions.org`, `inbox.org`, `habits.org`
+- Journals: `~/Data/notes/journals/YYYY-MM-DD.md`
+- Org files: `~/Data/org/next_actions.org`, `inbox.org`, `habits.org`
 - Look for: GTD daily start/end summaries, habit completion, AI work logs
 
 **For Trading Metrics:**
-- Journals: `/Users/gregor/Data/notes/journals/YYYY-MM-DD.md`
+- Journals: `~/Data/notes/journals/YYYY-MM-DD.md`
 - Trading logs: Sections with "Trading Journal", "/log-trade" entries
 - Look for: Trades executed, framework adherence, emotional state, violations
 
 **For Project Metrics:**
-- Org files: `/Users/gregor/Data/org/next_actions.org`
-- Project notes: `/Users/gregor/Data/notes/1-active/[project]/`
+- Org files: `~/Data/org/next_actions.org`
+- Project notes: `~/Data/notes/1-active/[project]/`
 - Look for: Task completion, milestones, blockers
 
 **For Work Area Analysis:**
@@ -156,7 +156,7 @@ Extract non-obvious insights from data:
 
 Generate structured report:
 
-**Output Location:** `/Users/gregor/Data/content/reports/`
+**Output Location:** `~/Data/content/reports/`
 
 **Filename Format:** `YYYY-MM-DD-[topic]-[type]-report.md`
 - Example: `2025-11-25-gtd-weekly-metrics-report.md`
@@ -268,7 +268,7 @@ Return structured JSON to ai-task-executor:
 ```json
 {
   "status": "completed",
-  "output_path": "/Users/gregor/Data/content/reports/2025-11-25-gtd-weekly-metrics-report.md",
+  "output_path": "~/Data/content/reports/2025-11-25-gtd-weekly-metrics-report.md",
   "summary": "Generated weekly GTD metrics report covering 22 tasks completed, 85% habit adherence, and 90% AI delegation success rate. Identified Wednesday scheduling conflict pattern.",
   "review_notes": "Check assumption that Wednesday drop is due to meetings (line 45). Verify AI delegation calculation excludes technical tasks (CTO queue).",
   "key_metrics": {
@@ -289,7 +289,7 @@ Return structured JSON to ai-task-executor:
 ```json
 {
   "status": "needs_review",
-  "output_path": "/Users/gregor/Data/content/reports/2025-11-30-trading-november-report.md",
+  "output_path": "~/Data/content/reports/2025-11-30-trading-november-report.md",
   "summary": "November trading performance report generated. Multiple interpretation approaches for burn rate calculation given irregular expenses.",
   "review_notes": "Burn rate calculation ambiguity detected.",
   "review_questions": [
@@ -452,12 +452,12 @@ Return structured JSON to ai-task-executor:
 
 **Reads From:**
 - Task from ai-task-executor (JSON input)
-- Journals: `/Users/gregor/Data/notes/journals/`
-- Org files: `/Users/gregor/Data/org/`
-- Project notes: `/Users/gregor/Data/notes/1-active/`
+- Journals: `~/Data/notes/journals/`
+- Org files: `~/Data/org/`
+- Project notes: `~/Data/notes/1-active/`
 
 **Writes To:**
-- `/Users/gregor/Data/content/reports/` (data reports)
+- `~/Data/content/reports/` (data reports)
 
 **Returns To:**
 - ai-task-executor (JSON response)

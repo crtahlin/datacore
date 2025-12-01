@@ -31,13 +31,15 @@ All landing pages MUST include:
 ```html
 <script src="https://eu-assets.i.posthog.com/static/array.js"></script>
 <script>
-    posthog.init('phc_g3ufMVvHNkKydA8vas97Del135UNYEFUuM2Sp0bzDoD', {
+    posthog.init('YOUR_POSTHOG_KEY', {
         api_host: 'https://eu.i.posthog.com',
         capture_pageview: true,
         capture_pageleave: 'if_capture_pageview'
     });
 </script>
 ```
+
+> **Note**: Get the actual PostHog key from `.datacore/env/posthog.env` or the deployed site.
 
 ### 2. Crawler Blocking (in `<head>`)
 ```html
@@ -91,15 +93,17 @@ if (window.posthog) {
 After modifying files, deploy using:
 
 ```bash
-/Users/gregor/Data/2-datacore/1-departments/dev/infrastructure/campaigns-module/scripts/deploy-site.sh <site>
+~/Data/2-datacore/1-departments/dev/infrastructure/campaigns-module/scripts/deploy-site.sh <site>
 ```
 
 Or via SSH directly:
 ```bash
-scp -i /Users/gregor/Data/.datacore/env/credentials/deploy_key \
+scp -i "$DATACORE_DEPLOY_KEY" \
     <local-file> \
-    deploy@209.38.243.88:/var/www/sites/<site>/
+    "$DATACORE_DEPLOY_HOST":/var/www/sites/<site>/
 ```
+
+> **Note**: Set `DATACORE_DEPLOY_KEY` and `DATACORE_DEPLOY_HOST` from `.datacore/env/deploy.env`
 
 ## Workflow
 

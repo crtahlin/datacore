@@ -63,23 +63,23 @@ Parsing content task...
 Based on category, gather relevant context:
 
 **For Datafund content:**
-- Read: `/Users/gregor/Data/notes/1-active/datafund/`
+- Read: `~/Data/notes/1-active/datafund/`
 - Key themes: Data privacy, Web5, decentralization, user ownership
 - Product: Data escrow, privacy-first infrastructure
 - Positioning: "Datafi" infrastructure layer
 
 **For Verity content:**
-- Read: `/Users/gregor/Data/notes/1-active/verity/`
+- Read: `~/Data/notes/1-active/verity/`
 - Key themes: Verification, identity, security
 - Product: Identity verification system
 
 **For Trading content:**
-- Read: `/Users/gregor/Data/notes/1-active/trading/`
+- Read: `~/Data/notes/1-active/trading/`
 - Key themes: Risk management, discipline, framework adherence
 - Avoid: Specific positions, financial advice
 
 **For Personal/General:**
-- Read relevant notes from `/Users/gregor/Data/notes/pages/`
+- Read relevant notes from `~/Data/notes/pages/`
 - Match tone to context
 
 ### Step 3: Generate Content
@@ -215,11 +215,11 @@ Hi [Name/Team],
 
 ### Step 5: Save Content
 
-**Output Location:** `/Users/gregor/Data/content/`
+**Output Location:** `~/Data/content/`
 
 **Directory Structure:**
 ```
-/Users/gregor/Data/content/
+~/Data/content/
 ├── blog/          # Blog posts
 ├── social/        # Social media content
 ├── emails/        # Email drafts
@@ -324,7 +324,7 @@ Return structured JSON to ai-task-executor:
 ```json
 {
   "status": "completed",
-  "output_path": "/Users/gregor/Data/content/blog/2025-11-25-datafund-privacy-blog.md",
+  "output_path": "~/Data/content/blog/2025-11-25-datafund-privacy-blog.md",
   "summary": "Created 1,450-word blog post on Datafund privacy features targeting Web3 developers. Framed privacy as competitive advantage with technical examples.",
   "review_notes": "Review technical accuracy in section 2 (cryptographic claims). Consider adding code example in section 4. CTA links to demo signup.",
   "word_count": 1450,
@@ -341,7 +341,7 @@ Return structured JSON to ai-task-executor:
 ```json
 {
   "status": "needs_review",
-  "output_path": "/Users/gregor/Data/content/emails/2025-11-25-investor-update-email.md",
+  "output_path": "~/Data/content/emails/2025-11-25-investor-update-email.md",
   "summary": "Draft investor update created covering Q4 milestones and Q1 roadmap. Multiple valid approaches to framing burn rate discussion.",
   "review_notes": "Email draft complete, but strategic framing decision needed.",
   "review_questions": [
@@ -502,11 +502,11 @@ Return structured JSON to ai-task-executor:
 
 **Reads From:**
 - Task from ai-task-executor (JSON input)
-- Project files in `/Users/gregor/Data/notes/1-active/`
-- Existing notes in `/Users/gregor/Data/notes/pages/`
+- Project files in `~/Data/notes/1-active/`
+- Existing notes in `~/Data/notes/pages/`
 
 **Writes To:**
-- `/Users/gregor/Data/content/[type]/` (content drafts)
+- `~/Data/content/[type]/` (content drafts)
 
 **Returns To:**
 - ai-task-executor (JSON response)

@@ -153,7 +153,7 @@ Before completing, verify:
 Organize all artifacts in this folder structure:
 
 ```
-/Users/gregor/Data/notes/archive/chatgpt-export-2025-11-08/processed/[conversation-id]/
+~/Data/notes/archive/chatgpt-export-2025-11-08/processed/[conversation-id]/
 ├── zettels/
 │   ├── [Concept 1].md
 │   ├── [Concept 2].md

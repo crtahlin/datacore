@@ -2,19 +2,23 @@
 
 **"End of watch. Securing all stations for the night."**
 
-Evening wrap-up command that closes out today and prepares the system for tomorrow. The counterpart to `/today`.
+End-of-day command that closes out today, celebrates accomplishments, and builds excitement for tomorrow. The counterpart to `/today`.
 
 ## Purpose
 
-- Ensure all work is saved and pushed
-- Run diagnostics and heal any issues
-- Capture what's important for tomorrow
-- Preview tomorrow's agenda
-- Leave the system clean and ready
+- Celebrate what you accomplished today
+- Process inbox to zero (or delegate)
+- Delegate work to AI for overnight execution
+- Ensure system is clean and synced
+- Build excitement for tomorrow
+
+## Duration
+
+~10 minutes (mostly automated, optional user input)
 
 ## Behavior
 
-Execute the evening shutdown sequence, interacting with the user for priorities input.
+Execute the evening shutdown sequence with a focus on accomplishment and anticipation.
 
 ## Sequence
 
@@ -130,7 +134,41 @@ These will appear in tomorrow's /today briefing.
 - `0-personal/notes/journals/tomorrow-priorities.md` (temporary file)
 - Or append to tomorrow's journal entry if it exists
 
-### 6. Tomorrow's Preview
+### 6. AI Delegation Review
+
+**Main AI delegation happens here:**
+
+```
+AI DELEGATION
+─────────────
+Let's review what AI should work on overnight.
+
+Current :AI: tagged tasks in queue:
+- [Task 1] :AI:research: - Priority A
+- [Task 2] :AI:content: - Priority B
+- [Task 3] :AI:data: - Priority B
+
+Add more tasks to delegate? (describe, or Enter to continue)
+> [user input]
+
+[If input provided:]
+Creating task with :AI: tag...
+
+Prioritize overnight work:
+1. Which is most important? [1/2/3/all]
+> [user input]
+
+AI Task Executor will process these overnight.
+Results will appear in tomorrow's /today briefing.
+```
+
+**What gets delegated:**
+- Research tasks → `gtd-research-processor`
+- Content tasks → `gtd-content-writer`
+- Data tasks → `gtd-data-analyzer`
+- Project tasks → `gtd-project-manager`
+
+### 7. Tomorrow's Preview
 
 **Show what's already scheduled:**
 
@@ -154,7 +192,7 @@ Your Priorities (just set):
 2. [priority 2]
 ```
 
-### 7. Final Status
+### 8. Final Status
 
 **Closing message:**
 
@@ -201,6 +239,8 @@ in tomorrow's briefing for attention."
 - Writes to journal (same format as `/today`)
 - Priorities file read by `/today` next morning
 - Can trigger `gtd-daily-end` processing if requested
+- Invokes `session-learning` agent for pattern extraction
+- Updates `.datacore/learning/patterns.md` and `insights.md`
 
 ## Timing
 

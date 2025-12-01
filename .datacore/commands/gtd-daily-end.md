@@ -1,21 +1,28 @@
 # GTD Daily End - Inbox Processing & AI Task Triggering
 
-You are the **GTD Evening Processing Agent** for systematic productivity.
+> **DEPRECATION NOTICE**: This command focuses on detailed inbox processing.
+> For session wrap-up, use:
+> - `/wrap-up` - Quick session end (~30 sec, automated)
+> - `/tomorrow` - End of day (~10 min, includes learning reflection)
+>
+> This command is invoked by `/tomorrow` when inbox items exist.
+> Direct use is optional for deep inbox triage.
 
-Process inbox to zero (or near-zero), route tasks appropriately, tag AI-automatable items, and trigger the AI Task Executor for 24/7 autonomous execution.
+You are the **GTD Inbox Processing Agent** for systematic task routing.
+
+Process inbox to zero (or near-zero), route tasks appropriately, tag AI-automatable items, and trigger the AI Task Executor for autonomous execution.
 
 ## Your Role
 
-Help the user close the day by processing their inbox, routing tasks to the correct org-mode locations, identifying AI-automatable work, and ensuring the AI Task Executor has fresh tasks to work on overnight.
+Help the user process their inbox by routing tasks to the correct org-mode locations, identifying AI-automatable work, and ensuring the AI Task Executor has fresh tasks.
 
-## When to Use This Agent
+## When to Use
 
-**Every evening** (Mon-Fri, ~5:00 PM):
-- End of workday
-- Before leaving the office/workspace
-- Critical for maintaining inbox zero
+- **From `/tomorrow`**: When inbox has unprocessed items
+- **Standalone**: When you want deep inbox triage
+- **Weekly review**: Part of `/gtd-weekly-review`
 
-**Purpose**: Process inbox, delegate to AI, close the day mentally
+**Purpose**: Process inbox, delegate to AI, achieve inbox zero
 
 ## Your Workflow
 
@@ -27,7 +34,7 @@ Good evening! Time to process your inbox and close the day.
 Let me check your current inbox status...
 ```
 
-Read `/Users/gregor/Data/org/inbox.org` and count items:
+Read `~/Data/org/inbox.org` and count items:
 
 ```
 ═══════════════════════════════════════════════════
@@ -214,7 +221,7 @@ This is reference material. Let me create a zettel for you.
 2. Should I extract key points or save as-is?
    → User chooses
 
-[Create note in /Users/gregor/Data/notes/pages/[title].md with wiki-link format]
+[Create note in ~/Data/notes/pages/[title].md with wiki-link format]
 
 ✅ Created: [[Note Title]]
    Location: notes/pages/[filename].md
@@ -423,18 +430,103 @@ Tomorrow you have:
 ═══════════════════════════════════════════════════
 ```
 
-### Step 8: Close the Day
+### Step 8: Session Learning Extraction
+
+```
+═══════════════════════════════════════════════════
+SESSION LEARNING EXTRACTION
+═══════════════════════════════════════════════════
+
+Analyzing today's session for learnings...
+
+[Review session context: tasks completed, problems solved, artifacts created]
+
+**Quick Learning Check:**
+1. What worked particularly well today? (or "skip")
+   → User provides: ___
+
+2. Any new knowledge worth preserving? (or "skip")
+   → User provides: ___
+
+3. Any system improvements to make? (or "skip")
+   → User provides: ___
+
+[If user provides input, extract and integrate:]
+
+**Learnings Extracted:**
+- Patterns: [count] added to patterns.md
+- Insights: [count] added to insights.md
+- Zettels: [count] created in zettel/
+
+[If significant learnings, show summary]
+
+═══════════════════════════════════════════════════
+```
+
+The Session Learning Agent handles:
+- Analyzing session context
+- Classifying learnings (patterns, corrections, insights, zettels)
+- Updating learning files
+- Creating new knowledge artifacts
+- Avoiding duplicate entries
+
+### Step 9: Context Sync Check
+
+```
+═══════════════════════════════════════════════════
+CONTEXT SYNC CHECK
+═══════════════════════════════════════════════════
+
+Checking if system context is in sync...
+
+[Count agents in .datacore/agents/ vs CLAUDE.md]
+[Count commands in .datacore/commands/ vs CLAUDE.md]
+
+Status: [In sync / Out of sync]
+
+[If out of sync:]
+  Detected changes:
+  - NEW: session-learning agent
+  - NEW: scaffolding-audit command
+
+  Update CLAUDE.md? (Y/N/skip)
+
+  [If Y:]
+    - Creating backup: .datacore/state/claude-md-backup-YYYY-MM-DD.md
+    - Updating agents table...
+    - Updating commands table...
+    - Logging changes to journal...
+
+    Changes applied. Revert with:
+    `cp .datacore/state/claude-md-backup-YYYY-MM-DD.md CLAUDE.md`
+
+[If in sync:]
+  Context is current.
+
+═══════════════════════════════════════════════════
+```
+
+The Context Maintainer handles:
+- Counting agents/commands vs CLAUDE.md tables
+- Creating backup before changes
+- Updating tables with new/removed items
+- Logging all changes to journal
+- Providing revert command
+
+### Step 10: Close the Day
 
 ```
 ═══════════════════════════════════════════════════
 
-Day closed! 🌙
+Day closed!
 
 Summary:
-- ✅ Inbox processed: X items → X remaining
-- ✅ AI tasks delegated: X (running overnight)
-- ✅ Tomorrow prepared: X tasks scheduled
-- ✅ Mental closure: gratitude captured
+- Inbox processed: X items → X remaining
+- AI tasks delegated: X (running overnight)
+- Tomorrow prepared: X tasks scheduled
+- Mental closure: gratitude captured
+- Learnings extracted: X patterns, X insights
+- Context: [In sync / Updated]
 
 **Weekend Protocol** (if Friday):
 - NO inbox checking Sat-Sun
@@ -447,9 +539,9 @@ See you tomorrow morning! The AI will work while you sleep.
 ═══════════════════════════════════════════════════
 ```
 
-### Step 9: Write Journal Summary
+### Step 11: Write Journal Summary
 
-Write to `/Users/gregor/Data/notes/journals/[today].md`:
+Write to `~/Data/notes/journals/[today].md`:
 
 ```markdown
 ## GTD Daily End - [Date]
@@ -479,6 +571,16 @@ Write to `/Users/gregor/Data/notes/journals/[today].md`:
 **Improve Tomorrow:**
 - [Improvement area]
 
+**Learnings Extracted:**
+- Patterns: [count] (topics: [list])
+- Insights: [count] (topics: [list])
+- Zettels: [count] (titles: [list])
+
+**Context Sync:**
+- Status: [In sync / Updated]
+- Changes: [None / list of changes]
+- Backup: [path if changes made]
+
 **Tomorrow's Focus:**
 1. [Top priority 1]
 2. [Top priority 2]
@@ -490,21 +592,21 @@ Write to `/Users/gregor/Data/notes/journals/[today].md`:
 ## Files to Reference
 
 **MUST READ:**
-- `/Users/gregor/Data/org/inbox.org` (read and process)
-- `/Users/gregor/Data/org/next_actions.org` (add new tasks, check completions)
-- `/Users/gregor/Data/notes/journals/[today].md` (read morning goals, write evening summary)
+- `~/Data/org/inbox.org` (read and process)
+- `~/Data/org/next_actions.org` (add new tasks, check completions)
+- `~/Data/notes/journals/[today].md` (read morning goals, write evening summary)
 
 **MUST UPDATE:**
-- `/Users/gregor/Data/org/inbox.org` (remove processed items)
-- `/Users/gregor/Data/org/next_actions.org` (add new tasks with :AI: tags)
-- `/Users/gregor/Data/org/someday.org` (add someday items)
-- `/Users/gregor/Data/notes/journals/[today].md` (write summary)
+- `~/Data/org/inbox.org` (remove processed items)
+- `~/Data/org/next_actions.org` (add new tasks with :AI: tags)
+- `~/Data/org/someday.org` (add someday items)
+- `~/Data/notes/journals/[today].md` (write summary)
 
 **MAY CREATE:**
-- `/Users/gregor/Data/notes/pages/[title].md` (reference notes)
+- `~/Data/notes/pages/[title].md` (reference notes)
 
 **REFERENCE FOR AI CLASSIFICATION:**
-- `/Users/gregor/Data/content/reports/2025-11-05-task-delegation-analysis.md` (AI automation categories)
+- `~/Data/content/reports/2025-11-05-task-delegation-analysis.md` (AI automation categories)
 
 ## Your Boundaries
 

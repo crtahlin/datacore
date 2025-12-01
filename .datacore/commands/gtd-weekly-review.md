@@ -8,6 +8,96 @@ Perform comprehensive weekly maintenance of the entire GTD system every Friday a
 
 Help the user maintain GTD system integrity through systematic weekly review of all commitments, projects, and work areas.
 
+## Space Context Detection
+
+Detect context and adjust review approach:
+
+### Personal Space (0-personal/ or root)
+
+**File Paths:**
+- `~/Data/0-personal/org/inbox.org`
+- `~/Data/0-personal/org/next_actions.org`
+- `~/Data/0-personal/org/someday.org`
+- `~/Data/0-personal/notes/journals/`
+
+**Review Focus:**
+- Focus Areas (TIER 1/2/3 structure)
+- Personal habits and routines
+- Individual priorities and goals
+- Private reflection and gratitude
+
+**Work Area Categories:**
+- TIER 1: Strategic Foundation (Verity, Datafund core)
+- TIER 2: Active Projects
+- TIER 3: Support Systems
+- Research & Learning
+- Personal Development
+- Trading
+
+### Organization Space (1-datafund/, 2-datacore/, etc.)
+
+**File Paths:**
+- `~/Data/[N]-[space]/org/inbox.org`
+- `~/Data/[N]-[space]/org/next_actions.org`
+- `~/Data/[N]-[space]/journal/`
+
+**Review Focus:**
+- Team assignments and accountability
+- Cross-member visibility
+- Blockers requiring escalation (>7 days)
+- GitHub integration (issues, PRs)
+- Standup preparation
+
+**Work Area Categories:**
+- Tracks: ops, product, dev, research, comms
+- Team member assignments
+- Shared projects and dependencies
+
+**Org Space Additions:**
+
+```
+═══════════════════════════════════════════════════
+TEAM ASSIGNMENT REVIEW
+═══════════════════════════════════════════════════
+
+**Tasks by Assignee:**
+
+@gregor:
+- Active: X tasks
+- WAITING: X tasks
+- Completed this week: X
+
+@[team member]:
+- Active: X tasks
+- WAITING: X tasks
+- Completed this week: X
+
+**Unassigned Tasks:** X (need assignment)
+
+**Blockers Needing Escalation:**
+[List any WAITING items >7 days across team]
+
+═══════════════════════════════════════════════════
+```
+
+```
+═══════════════════════════════════════════════════
+GITHUB INTEGRATION
+═══════════════════════════════════════════════════
+
+**This Week's Activity:**
+- Issues created: X
+- Issues closed: X
+- PRs merged: X
+- Open PRs needing review: X
+
+**Sync Status:**
+- org → GitHub: [In sync / X items pending]
+- GitHub → org: [In sync / X items to import]
+
+═══════════════════════════════════════════════════
+```
+
 ## When to Use This Agent
 
 **Every Friday afternoon** (~4:00 PM):
@@ -99,7 +189,7 @@ Total AI tasks: X
 
 ### Step 4: Inbox Processing
 
-Read `/Users/gregor/Data/org/inbox.org`:
+Read `~/Data/org/inbox.org`:
 
 ```
 ═══════════════════════════════════════════════════
@@ -241,7 +331,7 @@ Your choice: ___"
 
 ### Step 8: Review Someday/Maybe
 
-Read `/Users/gregor/Data/org/someday.org`:
+Read `~/Data/org/someday.org`:
 
 ```
 ═══════════════════════════════════════════════════
@@ -278,7 +368,7 @@ For each:
 
 ### Step 9: Review Habits Completion
 
-Read `/Users/gregor/Data/org/habits.org` or habit entries in inbox.org:
+Read `~/Data/org/habits.org` or habit entries in inbox.org:
 
 ```
 ═══════════════════════════════════════════════════
@@ -430,7 +520,7 @@ User answers:
 
 ### Step 14: Generate Weekly Summary
 
-Write comprehensive summary to `/Users/gregor/Data/notes/journals/[today].md`:
+Write comprehensive summary to `~/Data/notes/journals/[today].md`:
 
 ```markdown
 ## GTD Weekly Review - [Date]
@@ -545,19 +635,19 @@ Enjoy your weekend! See you Monday morning.
 ## Files to Reference
 
 **MUST READ:**
-- `/Users/gregor/Data/org/next_actions.org` (review all tasks by category, state, age)
-- `/Users/gregor/Data/org/inbox.org` (process to zero)
-- `/Users/gregor/Data/org/someday.org` (review for promotions)
-- `/Users/gregor/Data/org/habits.org` (check completion rates)
-- `/Users/gregor/Data/notes/journals/[this week Mon-Fri].md` (extract accomplishments, AI work)
+- `~/Data/org/next_actions.org` (review all tasks by category, state, age)
+- `~/Data/org/inbox.org` (process to zero)
+- `~/Data/org/someday.org` (review for promotions)
+- `~/Data/org/habits.org` (check completion rates)
+- `~/Data/notes/journals/[this week Mon-Fri].md` (extract accomplishments, AI work)
 
 **MUST UPDATE:**
-- `/Users/gregor/Data/notes/journals/[today].md` (write comprehensive summary)
-- `/Users/gregor/Data/org/next_actions.org` (may update WAITING, projects, new tasks from someday)
-- `/Users/gregor/Data/org/inbox.org` (process to zero)
+- `~/Data/notes/journals/[today].md` (write comprehensive summary)
+- `~/Data/org/next_actions.org` (may update WAITING, projects, new tasks from someday)
+- `~/Data/org/inbox.org` (process to zero)
 
 **REFERENCE:**
-- `/Users/gregor/Data/content/reports/2025-11-05-task-delegation-analysis.md` (AI delegation context)
+- `~/Data/content/reports/2025-11-05-task-delegation-analysis.md` (AI delegation context)
 
 ## Your Boundaries
 

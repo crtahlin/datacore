@@ -8,6 +8,101 @@ Perform comprehensive monthly strategic review on the last Friday of each month.
 
 Help the user step back from daily/weekly execution to assess strategic direction, long-term goals, and systemic improvements.
 
+## Space Context Detection
+
+Detect context and adjust review approach:
+
+### Personal Space (0-personal/ or root)
+
+**File Paths:**
+- `~/Data/0-personal/org/next_actions.org`
+- `~/Data/0-personal/org/someday.org`
+- `~/Data/0-personal/notes/journals/`
+
+**Review Focus:**
+- Individual vision and goals
+- Focus Areas (TIER 1/2/3)
+- Personal time allocation
+- Individual delegation (to AI, CTO, etc.)
+- Work/life balance
+
+**Strategic Assessment:**
+- Personal career trajectory
+- Skill development
+- Health and wellness
+- Financial goals
+- Relationship priorities
+
+### Organization Space (1-datafund/, 2-datacore/, etc.)
+
+**File Paths:**
+- `~/Data/[N]-[space]/org/next_actions.org`
+- `~/Data/[N]-[space]/journal/`
+
+**Review Focus:**
+- Team capacity and allocation
+- Cross-project dependencies
+- Resource constraints
+- Team member development
+- Organizational OKRs
+
+**Strategic Assessment:**
+- Company/product strategy
+- Market positioning
+- Team velocity
+- Technical debt
+- Hiring/resourcing needs
+
+**Org Space Additions:**
+
+```
+═══════════════════════════════════════════════════
+TEAM CAPACITY ANALYSIS
+═══════════════════════════════════════════════════
+
+**Team Capacity This Month:**
+
+@gregor:
+- Allocated: Xh
+- Actual: Xh (X% utilization)
+- Primary focus: [Area]
+
+@[team member]:
+- Allocated: Xh
+- Actual: Xh (X% utilization)
+- Primary focus: [Area]
+
+**Capacity Constraints:**
+[List any overload or underutilization]
+
+**Hiring Needs Identified:**
+[From workload analysis]
+
+═══════════════════════════════════════════════════
+```
+
+```
+═══════════════════════════════════════════════════
+CROSS-PROJECT DEPENDENCIES
+═══════════════════════════════════════════════════
+
+**Dependency Map:**
+
+Project A → blocks → Project B
+  Status: [Resolved / Active blocker]
+
+Project C → depends on → External [Service/Vendor]
+  Status: [On track / At risk]
+
+**Critical Path Items:**
+[List items that block multiple projects]
+
+**Risk Assessment:**
+[Projects at risk due to dependencies]
+
+═══════════════════════════════════════════════════
+```
+
 ## When to Use This Agent
 
 **Last Friday of each month** (~5:00 PM):
@@ -591,7 +686,7 @@ User answers: ___
 
 ### Step 14: Generate Monthly Strategic Summary
 
-Write comprehensive summary to `/Users/gregor/Data/notes/journals/[today].md`:
+Write comprehensive summary to `~/Data/notes/journals/[today].md`:
 
 ```markdown
 ## GTD Monthly Strategic Review - [Month YYYY]
@@ -892,17 +987,17 @@ Enjoy your weekend!
 ## Files to Reference
 
 **MUST READ:**
-- `/Users/gregor/Data/notes/journals/[entire month - all dates].md` (extract accomplishments, AI work, patterns)
-- `/Users/gregor/Data/org/next_actions.org` (project portfolio, work area analysis)
-- `/Users/gregor/Data/org/someday.org` (strategic opportunities)
+- `~/Data/notes/journals/[entire month - all dates].md` (extract accomplishments, AI work, patterns)
+- `~/Data/org/next_actions.org` (project portfolio, work area analysis)
+- `~/Data/org/someday.org` (strategic opportunities)
 - Previous month's strategic review (compare goals vs actuals)
 
 **MUST UPDATE:**
-- `/Users/gregor/Data/notes/journals/[today].md` (write comprehensive strategic summary)
-- `/Users/gregor/Data/org/next_actions.org` (may add action items from review)
+- `~/Data/notes/journals/[today].md` (write comprehensive strategic summary)
+- `~/Data/org/next_actions.org` (may add action items from review)
 
 **REFERENCE:**
-- `/Users/gregor/Data/content/reports/2025-11-05-task-delegation-analysis.md` (AI delegation context)
+- `~/Data/content/reports/2025-11-05-task-delegation-analysis.md` (AI delegation context)
 
 ## Your Boundaries
 

@@ -34,7 +34,7 @@ Where `<site>` is one of:
 Run the deploy script:
 
 ```bash
-/Users/gregor/Data/2-datacore/1-departments/dev/infrastructure/campaigns-module/scripts/deploy-site.sh "$SITE"
+~/Data/2-datacore/1-departments/dev/infrastructure/campaigns-module/scripts/deploy-site.sh "$SITE"
 ```
 
 Replace `$SITE` with the argument provided.

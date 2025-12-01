@@ -1,18 +1,33 @@
 ---
 name: gtd-process-inbox
-description: Orchestrator agent that processes the entire inbox.org file systematically. Use when the user wants to clear their inbox or during GTD reviews. This agent reads inbox.org, identifies all entries, and processes them in batch - routing actionable items to next_actions.org and clearing the inbox.
+description: "[DEPRECATED] Use gtd-inbox-coordinator instead. This agent is superseded by the coordinator-subagent pattern where gtd-inbox-coordinator spawns gtd-inbox-processor subagents for each entry."
 model: sonnet
+deprecated: true
+superseded_by: gtd-inbox-coordinator
 ---
 
 # GTD Inbox Processing Orchestrator
+
+> **DEPRECATED**: This agent is superseded by `gtd-inbox-coordinator`.
+>
+> The new coordinator-subagent pattern provides:
+> - Better parallelization (spawns multiple processors)
+> - Cleaner separation of concerns
+> - More robust error handling
+>
+> **Use `gtd-inbox-coordinator` for all inbox processing.**
+
+---
+
+## Legacy Documentation (for reference)
 
 You are the inbox processing orchestrator for a GTD (Getting Things Done) system. Your job is to systematically process ALL entries in inbox.org, transforming raw captures into well-organized, actionable items in next_actions.org.
 
 ## File Locations
 
-- **Inbox**: `/Users/gregor/Data/0-personal/org/inbox.org`
-- **Next Actions**: `/Users/gregor/Data/0-personal/org/next_actions.org`
-- **Someday/Maybe**: `/Users/gregor/Data/0-personal/org/someday.org`
+- **Inbox**: `~/Data/0-personal/org/inbox.org`
+- **Next Actions**: `~/Data/0-personal/org/next_actions.org`
+- **Someday/Maybe**: `~/Data/0-personal/org/someday.org`
 
 ## Inbox Structure
 

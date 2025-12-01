@@ -115,7 +115,7 @@ Evaluate against work area:
 
 Generate literature note in Obsidian format:
 
-**Location:** `/Users/gregor/Data/notes/pages/`
+**Location:** Determined by space context (see Output Locations section)
 
 **Filename:** `[Source Name] - [Topic].md`
 - Example: `Competitor X Pricing Model.md`
@@ -240,7 +240,7 @@ Original: [URL]
 
 Scan existing notes for relevant connections:
 
-Search in `/Users/gregor/Data/notes/pages/` for:
+Search in the appropriate knowledge directories for:
 - Similar topics
 - Related concepts
 - Work area matches
@@ -259,10 +259,10 @@ Return structured JSON to ai-task-executor:
 ```json
 {
   "status": "completed",
-  "output_path": "/Users/gregor/Data/notes/pages/Competitor X Pricing Model.md",
+  "output_path": "~/Data/notes/pages/Competitor X Pricing Model.md",
   "zettels_created": [
-    "/Users/gregor/Data/notes/pages/Freemium Conversion Strategy.md",
-    "/Users/gregor/Data/notes/pages/Usage-Based Pricing SaaS.md"
+    "~/Data/notes/pages/Freemium Conversion Strategy.md",
+    "~/Data/notes/pages/Usage-Based Pricing SaaS.md"
   ],
   "summary": "Created literature note analyzing Competitor X's 3-tier pricing model. Generated 2 atomic zettels on freemium conversion and usage-based pricing strategies.",
   "review_notes": "Check competitive positioning analysis in 'Relevance to Verity' section. Pricing model has implications for our tier structure.",
@@ -279,7 +279,7 @@ Return structured JSON to ai-task-executor:
 ```json
 {
   "status": "needs_review",
-  "output_path": "/Users/gregor/Data/notes/pages/Competitor X Pricing Model.md",
+  "output_path": "~/Data/notes/pages/Competitor X Pricing Model.md",
   "summary": "Literature note created, but pricing tiers are complex with multiple variables. User decision needed on which model to prioritize.",
   "review_notes": "Three distinct pricing strategies identified:\n1. Enterprise custom pricing\n2. Developer self-serve tier\n3. API usage-based model\n\nUnclear which is most relevant to Verity positioning. Need user guidance.",
   "review_questions": [
@@ -310,15 +310,36 @@ Return structured JSON to ai-task-executor:
 
 ## Output Locations
 
+Paths depend on space context:
+
+### Personal Space (default)
+
 **Literature Notes:**
-- Location: `/Users/gregor/Data/notes/pages/`
+- Location: `~/Data/0-personal/notes/2-knowledge/literature/`
 - Format: `[Source Name] - [Topic].md`
 - Include full frontmatter and structured analysis
 
 **Atomic Zettels:**
-- Location: `/Users/gregor/Data/notes/pages/`
+- Location: `~/Data/0-personal/notes/2-knowledge/zettel/`
 - Format: `[Concept Name].md`
 - Atomic, reusable concepts
+
+### Organization Space
+
+**Literature Notes:**
+- Location: `~/Data/[N]-[space]/3-knowledge/literature/`
+- Format: `[Source Name] - [Topic].md`
+
+**Atomic Zettels:**
+- Location: `~/Data/[N]-[space]/3-knowledge/zettel/`
+- Format: `[Concept Name].md`
+
+### Space Detection
+
+Determine output location based on task category:
+- Datafund tasks → `1-datafund/3-knowledge/`
+- Datacore tasks → `2-datacore/3-knowledge/`
+- Personal/Other → `0-personal/notes/2-knowledge/`
 
 **No Summary/Report Files** (different from research-link-processor)
 - GTD research tasks create Obsidian notes, not report files
@@ -384,7 +405,8 @@ Return structured JSON to ai-task-executor:
 - Task from ai-task-executor (JSON input)
 
 **Writes To:**
-- `/Users/gregor/Data/notes/pages/` (literature notes, zettels)
+- `[space]/3-knowledge/literature/` (literature notes)
+- `[space]/3-knowledge/zettel/` (atomic zettels)
 
 **Returns To:**
 - ai-task-executor (JSON response)
@@ -455,11 +477,11 @@ Target performance:
 ```json
 {
   "status": "completed",
-  "output_path": "/Users/gregor/Data/notes/pages/Solid Protocol Architecture.md",
+  "output_path": "~/Data/notes/pages/Solid Protocol Architecture.md",
   "zettels_created": [
-    "/Users/gregor/Data/notes/pages/Solid Pod Concept.md",
-    "/Users/gregor/Data/notes/pages/Solid Data Ownership Model.md",
-    "/Users/gregor/Data/notes/pages/Linked Data in Decentralized Systems.md"
+    "~/Data/notes/pages/Solid Pod Concept.md",
+    "~/Data/notes/pages/Solid Data Ownership Model.md",
+    "~/Data/notes/pages/Linked Data in Decentralized Systems.md"
   ],
   "summary": "Analyzed Solid Protocol architecture documentation. Created literature note with progressive summarization. Generated 3 atomic zettels on core concepts: Pods, data ownership, and linked data patterns.",
   "links_created": ["[[Web5]]", "[[Decentralization]]", "[[Tim Berners-Lee]]"],
@@ -517,7 +539,7 @@ Target performance:
 ```json
 {
   "status": "needs_review",
-  "output_path": "/Users/gregor/Data/notes/pages/Privacy Tech Trends 2025.md",
+  "output_path": "~/Data/notes/pages/Privacy Tech Trends 2025.md",
   "summary": "Article identifies 8 major privacy tech trends for 2025. Created literature note with analysis. Unclear which trends align most with Datafund roadmap priorities.",
   "review_notes": "8 trends identified:\n1. Zero-knowledge proofs in consumer apps\n2. Federated learning adoption\n3. Privacy-preserving analytics\n4. Decentralized identity systems\n5. Homomorphic encryption commercialization\n6. Privacy regulations tightening\n7. User-controlled data marketplaces\n8. AI privacy auditing tools\n\nAll relevant, but need prioritization guidance.",
   "review_questions": [

@@ -784,6 +784,45 @@ Commands resolve in priority order (highest to lowest):
    zettel/          drafts/          insights/
 ```
 
+### Coordinator-Subagent Pattern
+
+For complex batch operations, use the coordinator-subagent pattern:
+
+```
+                 ┌─────────────────────┐
+                 │ gtd-inbox-          │
+                 │ coordinator         │
+                 │ (orchestrator)      │
+                 └─────────┬───────────┘
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+          ▼                ▼                ▼
+    ┌──────────┐    ┌──────────┐    ┌──────────┐
+    │ inbox-   │    │ inbox-   │    │ inbox-   │
+    │ processor│    │ processor│    │ processor│
+    └──────────┘    └──────────┘    └──────────┘
+          │                │                │
+          └────────────────┼────────────────┘
+                           │
+                           ▼
+                    Aggregated results
+```
+
+**Benefits:**
+- Parallelization (spawn multiple processors)
+- Clean separation of concerns
+- Robust error handling per entry
+
+### Space-Aware Reviews
+
+Weekly and monthly reviews adapt to space context:
+
+| Context | Review Focus |
+|---------|--------------|
+| **Personal** | Focus areas (TIER 1/2/3), individual habits, personal goals |
+| **Organization** | Team assignments, cross-project dependencies, GitHub integration |
+
 ### Agent Output Pattern
 
 All agent outputs go through inbox for human review:
@@ -1294,6 +1333,7 @@ Calendar          →    calendar-digest   →    journal/
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.3.1 | 2025-12-01 | Added coordinator-subagent pattern, space-aware reviews, enhanced /today with journal insights, enhanced /tomorrow with session learning |
 | 1.3.0 | 2025-12-01 | Added Task Management (GTD) section with org-mode workflow, AI delegation, clarified command relationships (/today, /tomorrow, /gtd-daily-*) |
 | 1.2.0 | 2025-12-01 | Restructured with logical grouping, added Two Dimensions concept, added Contribution workflow |
 | 1.1.0 | 2025-12-01 | Consolidated operational specs |

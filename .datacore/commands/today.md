@@ -50,6 +50,18 @@ Generate under `## Daily Briefing` heading:
 
 ### Top 3 Must-Win Battles
 [Distilled priorities for the day]
+
+### Yesterday's Wins
+[Extract DONE items from yesterday's journal - celebrate accomplishments]
+
+### Data's Observation
+[Playful insight from pattern analysis - written in Data's voice]
+
+Examples:
+- "Fascinating. Your productivity peaks between 9-11 AM. I recommend scheduling deep work during this window."
+- "I observe you have completed 3 consecutive days of morning routines. The evidence suggests habit formation is progressing."
+- "Curious. Your WAITING items tend to resolve on Thursdays. Perhaps scheduling follow-ups for Wednesday would be optimal."
+- "Your research tasks consistently exceed estimated effort by 40%. Adjusting future estimates would improve planning accuracy."
 ```
 
 ## Space Today Content
@@ -85,11 +97,18 @@ For team spaces, write to `[space]/today/YYYY-MM-DD.md`:
 3. Scan recent journal entries for AI work completed overnight
 4. Check for WAITING items needing follow-up
 5. Identify decisions pending human input
-6. Generate markdown content
-7. **Write directly to file** (no user confirmation needed):
+6. **Extract yesterday's wins** - Read yesterday's journal for DONE items
+7. **Generate Data's observation** - Analyze patterns from past 7 days:
+   - Productivity patterns (time of day, day of week)
+   - Habit streaks (consecutive completions)
+   - Task completion trends
+   - Effort estimate accuracy
+   - Write in Data's voice (curious, analytical, no contractions)
+8. Generate markdown content
+9. **Write directly to file** (no user confirmation needed):
    - Personal: Append `## Today` section to journal file
    - Space: Write to today/YYYY-MM-DD.md
-8. Display brief console summary
+10. Display brief console summary
 
 ## Journal File Handling
 

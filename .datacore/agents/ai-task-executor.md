@@ -26,7 +26,7 @@ Autonomously execute tasks tagged with :AI: in next_actions.org, routing to appr
 
 ### Step 1: Scan for AI Tasks
 
-Continuously scan `/Users/gregor/Data/org/next_actions.org` for tasks with :AI: tags:
+Continuously scan `~/Data/org/next_actions.org` for tasks with :AI: tags:
 
 ```
 Scanning next_actions.org for :AI: tagged tasks...
@@ -192,7 +192,7 @@ Action taken:
 
 ### Step 6: Log All Executions to Journal
 
-**Personal journal** - Always write to `/Users/gregor/Data/0-personal/notes/journals/[today].md`
+**Personal journal** - Always write to `~/Data/0-personal/notes/journals/[today].md`
 
 **Space journals** - If task output was saved to a non-personal space, ALSO write to that space's journal:
 - Output in `1-datafund/` → also log to `1-datafund/journal/[today].md`
@@ -486,12 +486,12 @@ Returns:
 ## Integration Points
 
 **Reads From:**
-- `/Users/gregor/Data/org/next_actions.org` (scan for :AI: tags)
+- `~/Data/org/next_actions.org` (scan for :AI: tags)
 
 **Writes To:**
-- `/Users/gregor/Data/0-personal/notes/journals/[date].md` (log all executions)
+- `~/Data/0-personal/notes/journals/[date].md` (log all executions)
 - Space journals when output is in non-personal spaces (e.g., `1-datafund/journal/`, `2-datacore/journal/`)
-- `/Users/gregor/Data/0-personal/org/next_actions.org` (update task states)
+- `~/Data/0-personal/org/next_actions.org` (update task states)
 - Various output paths (content, reports, notes)
 
 **Coordinates With:**
