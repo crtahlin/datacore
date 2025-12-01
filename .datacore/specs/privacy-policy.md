@@ -1,8 +1,16 @@
 # Datacore Privacy Policy & Data Classification
 
-**Version**: 1.0
+**Version**: 1.1
 **Created**: 2025-11-29
-**Status**: Draft
+**Updated**: 2025-12-01
+**Status**: Implemented
+
+## Related DIPs
+
+| DIP | Relationship |
+|-----|--------------|
+| [DIP-0001](../../dips/DIP-0001-contribution-model.md) | Defines contribution model using this policy |
+| [DIP-0002](../../dips/DIP-0002-layered-context-pattern.md) | Implements four-level privacy via file layers |
 
 ## Purpose
 

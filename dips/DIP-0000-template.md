@@ -8,6 +8,11 @@
 | **Type** | Process |
 | **Status** | Implemented |
 | **Created** | 2025-12-01 |
+| **Updated** | 2025-12-01 |
+| **Tags** | `template`, `process` |
+| **Affects** | `dips/` |
+| **Specs** | - |
+| **Agents** | - |
 
 ## Summary
 

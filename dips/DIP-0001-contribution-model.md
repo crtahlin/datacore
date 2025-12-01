@@ -8,6 +8,11 @@
 | **Type** | Process |
 | **Status** | Implemented |
 | **Created** | 2025-12-01 |
+| **Updated** | 2025-12-01 |
+| **Tags** | `contribution`, `git`, `privacy`, `fork` |
+| **Affects** | `.gitignore`, `INSTALL.md`, `CATALOG.md` |
+| **Specs** | `privacy-policy.md` |
+| **Agents** | - |
 
 ## Summary
 

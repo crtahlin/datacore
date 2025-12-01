@@ -6,8 +6,13 @@
 | **Title** | Layered Context Pattern |
 | **Author** | Datacore Team |
 | **Type** | Core |
-| **Status** | Draft |
+| **Status** | Implemented |
 | **Created** | 2025-12-01 |
+| **Updated** | 2025-12-01 |
+| **Tags** | `context`, `privacy`, `CLAUDE.md`, `layers`, `contribution` |
+| **Affects** | `CLAUDE.md`, `.gitignore`, `agents/*.md`, `commands/*.md` |
+| **Specs** | `privacy-policy.md` |
+| **Agents** | `context-maintainer.md` |
 
 ## Summary
 

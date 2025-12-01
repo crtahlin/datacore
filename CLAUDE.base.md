@@ -132,10 +132,61 @@ Team spaces are separate git repos. GitHub Issues are source of truth.
 - **org-mode for AI** - Internal coordination and task routing
 - **Single capture point** - inbox.org, then route and remove
 
+## System Patterns (DIPs)
+
+Datacore follows documented patterns via **Datacore Improvement Proposals (DIPs)**:
+
+| DIP | Pattern | Summary |
+|-----|---------|---------|
+| [DIP-0001](dips/DIP-0001-contribution-model.md) | Contribution Model | Fork-and-overlay for privacy-safe contributions |
+| [DIP-0002](dips/DIP-0002-layered-context-pattern.md) | Layered Context | Four-level privacy for context files |
+
+### Layered Context Pattern (DIP-0002)
+
+All context files (CLAUDE.md, agents, commands) use layered privacy:
+
+| Layer | Suffix | Visibility | Tracking |
+|-------|--------|------------|----------|
+| PUBLIC | `.base.md` | Everyone | Tracked (PR to upstream) |
+| ORG | `.org.md` | Organization | Tracked in fork |
+| TEAM | `.team.md` | Team only | Optional |
+| PRIVATE | `.local.md` | Only you | Never tracked |
+
+**Composed file** (`.md`) is generated from layers and gitignored.
+
+```bash
+# Rebuild composed CLAUDE.md
+python .datacore/lib/context_merge.py rebuild --path .
+
+# Validate no private content in public layers
+python .datacore/lib/context_merge.py validate --path .
+```
+
+### When Making System Changes
+
+For significant changes, create a DIP:
+1. Copy `dips/DIP-0000-template.md`
+2. Fill in specification
+3. Submit PR to datacore repo
+4. Reference DIP in implementation
+
+See `dips/README.md` for full DIP workflow.
+
 ## Privacy
 
 See `.datacore/specs/privacy-policy.md` for data classification and sharing guidelines.
 
+## Specifications
+
+System behavior is documented in `.datacore/specs/`:
+
+| Spec | Purpose | Related DIPs |
+|------|---------|--------------|
+| `privacy-policy.md` | Data classification levels | DIP-0001, DIP-0002 |
+| `install-upgrade-process.md` | Installation workflow | - |
+
 ---
 
-**Setup**: Copy this file to `CLAUDE.md` and customize for your installation.
+**This is CLAUDE.base.md** - the PUBLIC layer. Customize by creating:
+- `CLAUDE.org.md` - Organization-specific context
+- `CLAUDE.local.md` - Personal notes (gitignored)
