@@ -41,6 +41,23 @@ A DIP is a design document providing information to the Datacore community about
 9. Status updated to Implemented
 ```
 
+## When to Create a DIP
+
+**Always create a DIP for:**
+- New patterns or conventions (like DIP-0002 Layered Context)
+- Changes affecting multiple repos or components
+- New agent types or command categories
+- Privacy or security model changes
+- Breaking changes to existing workflows
+
+**Small changes that DON'T need DIPs:**
+- Bug fixes
+- Documentation typos
+- Single-file improvements
+- Performance optimizations
+
+**AI agents should automatically create DIPs** when implementing significant system changes. This ensures all architectural decisions are documented and reviewable.
+
 ## Before Submitting
 
 1. **Search existing DIPs** - Your idea may already exist
@@ -57,6 +74,7 @@ See [DIP-0000-template.md](DIP-0000-template.md) for the template.
 |-----|-------|------|--------|
 | [0000](DIP-0000-template.md) | DIP Template | Process | Implemented |
 | [0001](DIP-0001-contribution-model.md) | Contribution Model | Process | Implemented |
+| [0002](DIP-0002-layered-context-pattern.md) | Layered Context Pattern | Core | Implemented |
 
 ## Contributing
 
