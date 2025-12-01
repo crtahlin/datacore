@@ -52,6 +52,9 @@ CLAUDE.md
 # Wiki pages (personal knowledge) - preserve folder with .gitkeep
 **/pages/*
 !**/pages/.gitkeep
+# Exception: datacore-docs are public documentation
+!**/pages/datacore-docs/
+!**/pages/datacore-docs/**
 
 # Web clippings (reading habits) - preserve folder with .gitkeep
 **/Clippings/*

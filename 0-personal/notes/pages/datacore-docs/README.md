@@ -1,28 +1,26 @@
 # Datacore Documentation
 
-System documentation and tutorials for new users.
-
-## Reference
-
-- [Commands Reference](commands.md) - All slash commands
-- [Agents Reference](agents.md) - AI agents and how to use them
-- [Modules](modules.md) - Installing and creating modules
+System documentation and tutorials for Datacore users.
 
 ## Getting Started
 
-1. Follow the [Installation Guide](../INSTALL.md)
-2. Read the [Commands Reference](commands.md) to understand available workflows
-3. Review the [Agents Reference](agents.md) to learn about AI task delegation
+- [[Welcome to Datacore]] - Your first day with Datacore
+- [[GTD Workflow]] - How the GTD system works
 
-## Quick Links
+## Reference
 
-- [Main README](../README.md) - Project overview
-- [CATALOG](../.datacore/CATALOG.md) - Available spaces and modules
-- [CONTRIBUTING](../CONTRIBUTING.md) - How to contribute
+- [[Commands Reference]] - All slash commands
+- [[Agents Reference]] - AI agents and how to use them
+- [[Modules]] - Installing and creating modules
+
+## Quick Start
+
+1. Run `/gtd-daily-start` - Claude sets up your focus areas
+2. Capture everything to `org/inbox.org`
+3. Run `/gtd-daily-end` - Process inbox, delegate to AI
+4. Next morning: AI work completed
 
 ## GTD Workflow Overview
-
-The core Datacore workflow follows GTD (Getting Things Done) methodology:
 
 | Time | Action | Command |
 |------|--------|---------|
@@ -42,3 +40,10 @@ Tag tasks in `next_actions.org` for overnight AI processing:
 | `:AI:content:` | gtd-content-writer | Blog posts, emails, docs |
 | `:AI:data:` | gtd-data-analyzer | Reports, metrics |
 | `:AI:pm:` | gtd-project-manager | Status updates |
+
+## External Links
+
+- [Main README](../../../../README.md) - Project overview
+- [INSTALL.md](../../../../INSTALL.md) - Installation guide
+- [CONTRIBUTING.md](../../../../CONTRIBUTING.md) - How to contribute
+- [datacore.one](https://datacore.one) - Official website
