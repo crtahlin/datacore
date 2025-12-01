@@ -114,16 +114,46 @@ ls -la ~/Data/.datacore/
 
 ## Adding Team Spaces
 
-Team spaces are separate repositories that sync alongside your personal space.
+Team spaces use the **fork-and-overlay** model for maximum contribution potential.
 
-### Step 1: Create Team Space
+### How It Works
 
-```bash
-# Clone team repo (or create new)
-git clone https://github.com/org/datacore-team.git ~/Data/1-teamname
+```
+datacore-org (template)     Your fork              Your content
+        │                       │                       │
+        │    fork               │                       │
+        └──────────────────────>│                       │
+                                │    clone              │
+                                └──────────────────────>│ ~/Data/1-teamname/
+                                                        │
+                                                        ├── System (tracked)
+                                                        │   - .datacore/agents/
+                                                        │   - .datacore/commands/
+                                                        │   - CLAUDE.md
+                                                        │
+                                                        └── Content (gitignored)
+                                                            - org/*.org
+                                                            - journal/
+                                                            - 2-knowledge/
 ```
 
-### Step 2: Register in install.yaml
+### Step 1: Fork the Template
+
+1. Go to [github.com/datacore-one/datacore-org](https://github.com/datacore-one/datacore-org)
+2. Click "Fork" to create `your-org/datacore-org`
+
+### Step 2: Clone Your Fork
+
+```bash
+# Clone YOUR fork (not datacore-one)
+git clone https://github.com/your-org/datacore-org.git ~/Data/1-teamname
+cd ~/Data/1-teamname
+
+# Add upstream for syncing improvements
+git remote add upstream https://github.com/datacore-one/datacore-org.git
+```
+
+### Step 3: Register in install.yaml
 
 ```yaml
 spaces:
@@ -133,12 +163,54 @@ spaces:
   - id: 1-teamname
     name: Team Name
     type: team
-    repo: https://github.com/org/datacore-team.git
+    repo: https://github.com/your-org/datacore-org.git
+    upstream: https://github.com/datacore-one/datacore-org.git
 ```
 
-### Step 3: Configure Team CLAUDE.md
+### Step 4: Customize CLAUDE.md
 
-Each team space has its own `CLAUDE.md` with team-specific context.
+Edit `CLAUDE.md` with your organization's context:
+- Team description
+- Key projects
+- Important links
+- Custom workflows
+
+### Contributing Improvements
+
+When you improve an agent, command, or structure:
+
+```bash
+# Your improvement is in a system file (tracked)
+git add .datacore/agents/my-improved-agent.md
+git commit -m "Improve agent X to handle Y"
+git push origin main
+
+# Open PR to upstream
+# Go to github.com/datacore-one/datacore-org
+# Click "New Pull Request" → "compare across forks"
+# Select your fork and branch
+```
+
+### Syncing Upstream Improvements
+
+Get improvements from the community:
+
+```bash
+cd ~/Data/1-teamname/
+git fetch upstream
+git merge upstream/main
+# Resolve any conflicts in system files
+git push origin main
+```
+
+### What's Tracked vs Local
+
+| Tracked (contribute via PR) | Local (gitignored) |
+|----------------------------|-------------------|
+| `.datacore/agents/*.md` | `org/*.org` |
+| `.datacore/commands/*.md` | `journal/*.md` |
+| `CLAUDE.md` | `2-knowledge/**/*.md` |
+| `*/_index.md`, `*/README.md` | `1-departments/**/*.md` |
 
 ## Installing Modules
 
