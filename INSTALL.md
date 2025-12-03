@@ -22,14 +22,18 @@ mkdir ~/Data && cd ~/Data
 claude
 ```
 
-Then tell Claude: **"fork and clone datacore-one/datacore into this directory"**
+Then tell Claude:
 
-Claude will:
-1. Run `gh repo fork datacore-one/datacore --clone=false`
-2. Clone your fork with `git clone https://github.com/YOUR-USERNAME/datacore.git .`
-3. Add upstream: `git remote add upstream https://github.com/datacore-one/datacore.git`
-4. Guide you through interactive setup
-5. Set up onboarding tasks based on your role
+**"fork datacore-one/datacore, then clone it HERE (current directory, not a subdirectory) using `git clone <url> .`"**
+
+Claude must run these exact commands:
+```bash
+gh repo fork datacore-one/datacore --clone=false
+git clone https://github.com/YOUR-USERNAME/datacore.git .   # <-- NOTE THE DOT!
+git remote add upstream https://github.com/datacore-one/datacore.git
+```
+
+**IMPORTANT**: The `.` at the end of `git clone` means "clone into current directory". Without it, git creates a `datacore/` subdirectory which is wrong.
 
 ## Manual Installation
 
