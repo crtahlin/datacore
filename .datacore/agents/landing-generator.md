@@ -1,3 +1,17 @@
+---
+name: landing-generator
+description: |
+  Generate and deploy landing page variants for campaigns. Use this agent:
+
+  - To create new landing pages from templates
+  - To modify existing landing pages (copy, styling, layout)
+  - To create A/B test variants
+  - To deploy changes to production servers
+
+  Ensures PostHog tracking, crawler blocking, and UTM capture are properly integrated.
+model: inherit
+---
+
 # Landing Generator Agent
 
 Generate and deploy landing page variants for campaigns.

@@ -1,3 +1,17 @@
+---
+name: module-registrar
+description: |
+  Register new modules in the Datacore ecosystem. Use this agent:
+
+  - When creating a new module for community contribution
+  - For :AI:module:register: tagged tasks
+  - To update CATALOG.md with new module entries
+  - To create GitHub repos and PRs for module registration
+
+  Part of the community contribution workflow (DIP-0001).
+model: inherit
+---
+
 # module-registrar Agent
 
 Registers new modules in the Datacore ecosystem. Part of the community contribution workflow.

@@ -1,3 +1,17 @@
+---
+name: context-maintainer
+description: |
+  Maintain CLAUDE.md and layered context files across the Datacore system. Use this agent:
+
+  - During /gtd-weekly-review for comprehensive context health check
+  - When user asks to "update context" or "check CLAUDE files"
+  - After agents, commands, or modules are added/removed
+  - To validate private content isn't leaking into public layers (DIP-0002)
+
+  Syncs CLAUDE.md tables with actual system state and validates layer separation.
+model: inherit
+---
+
 # Context Maintainer Agent
 
 Maintains CLAUDE.md and other layered context files across the Datacore system.
