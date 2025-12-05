@@ -15,7 +15,7 @@ sync_repo() {
 
     if [ "$ACTION" = "pull" ]; then
         echo "Pulling $name..."
-        git -C "$repo" pull --rebase 2>/dev/null || echo "  (no remote or error)"
+        git -C "$repo" pull --rebase --autostash 2>/dev/null || echo "  (no remote or error)"
     elif [ "$ACTION" = "push" ]; then
         echo "Pushing $name..."
         git -C "$repo" add -A
