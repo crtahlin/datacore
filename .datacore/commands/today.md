@@ -136,7 +136,8 @@ For team spaces, write to `[space]/today/YYYY-MM-DD.md`:
 9. **Write directly to file** (no user confirmation needed):
    - Personal: Append `## Today` section to journal file
    - Space: Write to today/YYYY-MM-DD.md
-10. Display brief console summary
+10. **Open journal for review**: `open <journal_path>` to launch in default editor
+11. Display brief console summary
 
 ## Journal File Handling
 
@@ -182,5 +183,6 @@ today:
 ## Output
 
 - Content written directly to journal (personal) or today/ file (space)
+- Journal opened in default editor for review
 - Brief console summary of top priorities
 - No downstream prompts or questions
