@@ -268,15 +268,18 @@ WRAP-UP CHECKLIST
 [ ] 2. Continuation tasks created (if work incomplete)
 [ ] 3. Completed tasks marked DONE in next_actions.org
 [ ] 4. Session learnings captured (patterns.md)
-[ ] 5. Personal journal updated (0-personal/notes/journals/)
-[ ] 6. Space journal updated (if working in a space)
-[ ] 7. All repos pushed:
+[ ] 5. Journals updated (only if relevant work was done):
+      [ ] Personal (0-personal/notes/journals/) - always
+      [ ] Datafund (1-datafund/journal/) - if datafund work
+      [ ] Datacore (2-datacore/journal/) - if datacore work
+[ ] 6. All repos pushed:
       [ ] Root & spaces (./sync push)
       [ ] Subproject repos (verity, etc.)
-[ ] 8. Context sync completed
-[ ] 9. AI delegation captured (if any)
+[ ] 7. Context sync completed
+[ ] 8. AI delegation captured (if any)
 
-Missing items? Complete them before closing.
+Note: Space journals only need updating if session involved that space.
+      It's OK to skip a space journal if no relevant work was done.
 ```
 
 **Verification commands:**
@@ -285,9 +288,10 @@ Missing items? Complete them before closing.
 git -C ~/Data status --short
 git -C ~/Data/1-datafund/2-projects/verity log --oneline origin/main..HEAD
 
-# Check journals exist
+# Check journals exist (personal is required, spaces are optional)
 ls -la ~/Data/0-personal/notes/journals/$(date +%Y-%m-%d).md
 ls -la ~/Data/1-datafund/journal/$(date +%Y-%m-%d).md 2>/dev/null
+ls -la ~/Data/2-datacore/journal/$(date +%Y-%m-%d).md 2>/dev/null
 ```
 
 ### 11. Close
@@ -297,13 +301,13 @@ ls -la ~/Data/1-datafund/journal/$(date +%Y-%m-%d).md 2>/dev/null
 SESSION COMPLETE
 ═══════════════════════════════════════════════════
 
-Checklist: [X/9 items verified]
+Checklist: [X/8 items verified]
 
 Summary:
 - Tasks completed: X
 - Continuation tasks: X (with bootstrap context)
 - Learnings captured: X patterns
-- Journals updated: personal + [space if applicable]
+- Journals updated: personal [+ datafund] [+ datacore]
 - All repos pushed: Yes
 
 [If continuation task created:]
