@@ -57,7 +57,7 @@ For each entry, determine its type:
 | Type | Characteristics | Destination |
 |------|-----------------|-------------|
 | **Actionable Task** | Has clear outcome, verb-driven | next_actions.org (appropriate focus area) |
-| **Research/Reading** | URL, article, content to consume | next_actions.org → Research & Learning |
+| **Research/Reading** | URL, article, content to consume | research_learning.org (separate file) |
 | **Reference** | Pure info, no action needed | Create note in notes/pages/ OR skip |
 | **Someday/Maybe** | Good idea, not now | someday.org |
 | **Trash** | No longer relevant | Delete |
@@ -68,7 +68,7 @@ For each entry, determine its type:
 - `* TIER 1: STRATEGIC FOUNDATION` → Verity, Datafund core
 - `* TIER 2: ACTIVE PROJECTS` → Active project work
 - `* TIER 3: SUPPORT SYSTEMS` → Operations, infrastructure
-- `* Research & Learning` → Articles, courses, topics to explore
+- `research_learning.org` → Articles, courses, topics to explore (separate file)
 - `* Personal` → Health, habits, personal development
 - `* Trading` → Trading-related tasks
 

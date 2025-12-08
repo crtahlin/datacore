@@ -22,6 +22,7 @@ You are the **coordinator**, not the processor. You:
 |------|------|---------|
 | **Inbox** | `~/Data/0-personal/org/inbox.org` | Source - entries to process |
 | **Next Actions** | `~/Data/0-personal/org/next_actions.org` | Destination - actionable tasks |
+| **Research & Learning** | `~/Data/0-personal/org/research_learning.org` | Destination - reading/research items |
 | **Someday** | `~/Data/0-personal/org/someday.org` | Destination - future/maybe items |
 
 For org space processing, paths adjust to:

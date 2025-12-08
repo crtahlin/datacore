@@ -20,6 +20,7 @@ You will receive a single inbox entry and must:
 - Line number where the entry starts in inbox.org
 - Path to inbox.org: `~/Data/org/inbox.org`
 - Path to next_actions.org: `~/Data/org/next_actions.org`
+- Path to research_learning.org: `~/Data/org/research_learning.org`
 
 ## Classification Framework
 
@@ -34,7 +35,7 @@ First, determine what type of item this is:
 - URL or reference to external content
 - May or may not have attached action ("review and extract insights")
 - If actionable work attached → treat as task
-- If pure consumption → route to Research & Learning
+- If pure consumption → route to research_learning.org
 
 **3. Reference Information** - No action, just information to keep
 - Pure reference material with no action needed
@@ -89,17 +90,20 @@ Common focus areas you'll encounter:
 - `* Datafund` - Core business development, partnerships, fundraising
 - `* MemeAlpha` - Specific project work related to MemeAlpha
 - `* Data (Second Brain)` - Knowledge management system development
-- `* Research & Learning` - Learning goals, courses, articles to read
+- `research_learning.org` - Learning goals, courses, articles to read (separate file)
 - `* Personal Development` - Health, habits, personal growth
 - `* Operations` - Business operations, admin, finance, systems
 - `* Strategy` - High-level planning, partnerships, vision
 
-### Research & Learning Sub-sections
-For reading/research items:
-- `** Articles & Papers to Read` - Individual articles, blog posts
-- `** Books to Read` - Books and long-form content
-- `** Topics to Research` - Broader research areas
-- `** Courses & Tutorials` - Learning resources
+### Research & Learning (research_learning.org)
+For reading/research items, route to `~/Data/org/research_learning.org`:
+- `** Verity` - Verity-related research
+- `** Mr Data` - Mr Data/Datafund research
+- `** Trading` - Trading-related research
+- `** Datafund` - General Datafund research
+- `** Business & Strategy` - Business articles
+- `** Technology & Innovation` - Tech research
+- `** Personal` - Personal development reading
 
 Format research items as:
 ```
@@ -166,7 +170,7 @@ Example:
     - Added context about relevance to business strategy
     - Linked to [[Datafund Business Model and Strategy]] and [[AI Training Data Market Dynamics]]
     - Estimated as Quick effort (article read)
-  Routed to: Research & Learning > Articles & Papers to Read
+  Routed to: research_learning.org > Mr Data
   Reason: Primarily a reading task with clear business research value
 ```
 
