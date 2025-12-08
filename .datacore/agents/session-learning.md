@@ -3,13 +3,17 @@ name: session-learning
 description: |
   Extract learnings, patterns, and insights from work sessions. Use this agent:
 
-  - At end of /wrap-up (ALWAYS run, even for light sessions)
+  - Spawned by session-learning-coordinator for each space
   - After completing major tasks or projects
   - After problem-solving sessions with novel solutions
   - When user explicitly requests learning extraction
 
   The agent analyzes session work, identifies reusable patterns, and updates
-  .datacore/learning/ files (patterns.md, corrections.md, preferences.md).
+  the target space's .datacore/learning/ files (patterns.md, corrections.md, preferences.md).
+
+  **Input parameter** (via prompt):
+  - `space`: Target space directory (e.g., "0-personal", "1-datafund", "2-datacore")
+  - If space not provided, falls back to detecting from session context
 model: inherit
 ---
 
@@ -45,7 +49,14 @@ Review the session to identify:
 
 ### Phase 2: Knowledge Classification
 
-**IMPORTANT: Space-Aware Routing**
+**IMPORTANT: Space Parameter**
+
+If a `space` parameter was provided in your prompt (e.g., "Extract learnings for space: 1-datafund"):
+- **Use that space directly** - do not auto-detect
+- Write to that space's `.datacore/learning/` directory
+- This happens when spawned by `session-learning-coordinator`
+
+**If NO space parameter provided** (fallback mode):
 
 Before classifying, determine which space the session primarily worked in:
 
@@ -53,7 +64,7 @@ Before classifying, determine which space the session primarily worked in:
 2. **Team/project space** (e.g., 2-datacore/, 1-datafund/) → Use space's `.datacore/learning/` and `3-knowledge/`
 3. **Cross-cutting** → Use root `.datacore/learning/` for patterns, appropriate space for zettels
 
-**Routing Rules:**
+**Auto-detection Routing Rules:**
 - If session was about Datacore development (DIPs, agents, specs) → `2-datacore/`
 - If session was about Datafund business → `1-datafund/`
 - If session was personal productivity → `0-personal/`

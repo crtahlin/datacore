@@ -112,59 +112,55 @@ Found X tasks that appear complete:
 [Update org-mode states]
 ```
 
-### 4. Session Learning (Automatic + Light Prompt)
+### 4. Session Learning & Journal Update (Coordinator Pattern)
+
+**Spawn two coordinators in parallel:**
+
+1. **`journal-coordinator`** - Discovers spaces, spawns journal-entry-writer per space
+2. **`session-learning-coordinator`** - Discovers spaces, spawns session-learning per space
 
 ```
-SESSION LEARNING
-────────────────
-Extracting learnings from this session...
+SESSION LEARNING & JOURNALS
+───────────────────────────
+Discovering spaces and spawning per-space agents...
 
-Patterns detected:
-- [Auto-detected pattern from work done]
+Spaces found: 0-personal, 1-datafund, 2-datacore
 
-Any additional insights to capture? (brief, or Enter to skip)
-> [user input]
+[Spawning in parallel:]
+  - journal-coordinator → journal-entry-writer × N
+  - session-learning-coordinator → session-learning × N
 
-[If input provided:]
-Added to patterns.md: [description]
+[Results aggregated:]
 
-[If skipped:]
-Automatic patterns captured.
+Journals updated:
+  - 0-personal/notes/journals/YYYY-MM-DD.md ✓
+  - 1-datafund/journal/YYYY-MM-DD.md ✓ (if work done there)
+  - 2-datacore/journal/YYYY-MM-DD.md ✓ (if work done there)
+
+Learnings captured:
+  - personal: X patterns
+  - datafund: X patterns (if relevant)
+  - datacore: X patterns (if relevant)
 ```
 
-**What gets captured:**
-- Successful approaches used
-- New patterns discovered
-- Corrections made (to corrections.md)
-- Insights worth preserving
+**How it works:**
 
-### 5. Journal Entry (Automatic)
+1. Each coordinator discovers spaces via `ls -d [0-9]-*/`
+2. Coordinator determines which spaces had relevant work
+3. Spawns subagent for each relevant space (in parallel)
+4. Subagents write to space-specific files
+5. Coordinator aggregates and returns summary
 
-**Append to today's journal** (`0-personal/notes/journals/YYYY-MM-DD.md`):
+**What gets captured per space:**
+- Patterns → `[space]/.datacore/learning/patterns.md`
+- Corrections → `[space]/.datacore/learning/corrections.md`
+- Insights → `[space]/3-knowledge/insights.md`
+- Journal entry → `[space]/journal/YYYY-MM-DD.md`
 
-```markdown
-## Session: HH:MM - [Goal]
+**Any additional insights to capture?** (brief, or Enter to skip)
+> [user input - passed to coordinators]
 
-**Accomplished:**
-- [Key accomplishment 1]
-- [Key accomplishment 2]
-
-**Continuation:**
-- [Task created if incomplete]
-
-**Learnings:**
-- [Patterns/insights captured]
-
-**Files:**
-- Created: [list]
-- Modified: [list]
-```
-
-**If working in a space, also update space journal:**
-- `1-datafund/journal/YYYY-MM-DD.md`
-- `2-datacore/journal/YYYY-MM-DD.md`
-
-### 6. Index Session to Database (DIP-0004)
+### 5. Index Session to Database (DIP-0004)
 
 ```
 INDEXING SESSION
@@ -185,7 +181,7 @@ Session indexed:
 python ~/.datacore/lib/journal_parser.py --sync --space personal
 ```
 
-### 7. Push Changes to Repos
+### 6. Push Changes to Repos
 
 **Push ALL repos including subprojects within spaces.**
 
@@ -233,7 +229,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
   Your changes are committed locally.
 ```
 
-### 8. Context Sync (Automatic, Silent)
+### 7. Context Sync (Automatic, Silent)
 
 ```
 [Check if agents/commands changed during session]
@@ -241,7 +237,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 [Log to journal if updates made]
 ```
 
-### 9. Quick AI Delegation Check (Optional)
+### 8. Quick AI Delegation Check (Optional)
 
 ```
 AI DELEGATION
@@ -257,7 +253,7 @@ Will be reviewed in /tomorrow for overnight execution.
 No new AI tasks.
 ```
 
-### 10. Completion Checklist (REQUIRED)
+### 9. Completion Checklist (REQUIRED)
 
 **Before closing, verify all steps are done:**
 
@@ -294,7 +290,7 @@ ls -la ~/Data/1-datafund/journal/$(date +%Y-%m-%d).md 2>/dev/null
 ls -la ~/Data/2-datacore/journal/$(date +%Y-%m-%d).md 2>/dev/null
 ```
 
-### 11. Close
+### 10. Close
 
 ```
 ═══════════════════════════════════════════════════
@@ -382,5 +378,8 @@ Run `/tomorrow` once at end of day.
 - `/tomorrow` - End of day, full AI delegation
 - `/today` - Start of day briefing
 - `/gtd-daily-start` - Morning planning
-- `session-learning` agent
+- `journal-coordinator` agent - Orchestrates per-space journal entries
+- `journal-entry-writer` agent - Writes single space journal entry
+- `session-learning-coordinator` agent - Orchestrates per-space learning extraction
+- `session-learning` agent - Extracts learnings for single space
 - `context-maintainer` agent
