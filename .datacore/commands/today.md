@@ -65,7 +65,21 @@ Generate under `## Daily Briefing` heading:
 - Flag any OVERDUE items
 
 ### Calendar
-[Today's calendar events if available]
+[Today's calendar events from Google Calendar]
+
+**To fetch events** (if calendar adapter enabled):
+```python
+from sync.adapters.calendar import GoogleCalendarAdapter
+adapter = GoogleCalendarAdapter(calendar_id="gregor@datafund.io")
+events = adapter.pull_events(days=1)
+for e in events:
+    print(f"  {e.timestamp.strftime('%H:%M')} | {e.title}")
+```
+
+Or sync to org file:
+```bash
+python .datacore/lib/sync/adapters/calendar.py sync --calendar gregor@datafund.io --days 1
+```
 
 ### Overnight AI Work
 [Summary of completed :AI: tasks from journal/org since last briefing]
@@ -131,22 +145,26 @@ For team spaces, write to `[space]/today/YYYY-MM-DD.md`:
 
 1. Determine context (personal vs space)
 2. Read org/next_actions.org for priorities (DEADLINE, SCHEDULED, PRIORITY A)
-3. Scan recent journal entries for AI work completed overnight
-4. Check for WAITING items needing follow-up
-5. Identify decisions pending human input
-6. **Extract yesterday's wins** - Read yesterday's journal for DONE items
-7. **Generate Data's observation** - Analyze patterns from past 7 days:
+3. **Sync calendar** (DIP-0010 Phase 3):
+   - Check if calendar adapter is enabled in settings
+   - If enabled, sync today's events from Google Calendar
+   - Update calendar.org with latest events
+4. Scan recent journal entries for AI work completed overnight
+5. Check for WAITING items needing follow-up
+6. Identify decisions pending human input
+7. **Extract yesterday's wins** - Read yesterday's journal for DONE items
+8. **Generate Data's observation** - Analyze patterns from past 7 days:
    - Productivity patterns (time of day, day of week)
    - Habit streaks (consecutive completions)
    - Task completion trends
    - Effort estimate accuracy
    - Write in Data's voice (curious, analytical, no contractions)
-8. Generate markdown content
-9. **Write directly to file** (no user confirmation needed):
-   - Personal: Append `## Today` section to journal file
-   - Space: Write to today/YYYY-MM-DD.md
-10. **Open journal for review**: `open <journal_path>` to launch in default editor
-11. Display brief console summary
+9. Generate markdown content
+10. **Write directly to file** (no user confirmation needed):
+    - Personal: Append `## Today` section to journal file
+    - Space: Write to today/YYYY-MM-DD.md
+11. **Open journal for review**: `open <journal_path>` to launch in default editor
+12. Display brief console summary
 
 ## Journal File Handling
 

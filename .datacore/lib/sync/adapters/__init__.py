@@ -74,7 +74,12 @@ try:
 except ImportError:
     pass  # GitHub adapter not available (missing dependencies)
 
+try:
+    from .calendar import GoogleCalendarAdapter
+    register_adapter("calendar", GoogleCalendarAdapter)
+except ImportError:
+    pass  # Calendar adapter not available (missing dependencies)
+
 # Future adapters:
-# from .calendar import CalendarAdapter
 # from .asana import AsanaAdapter
 # from .linear import LinearAdapter
