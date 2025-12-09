@@ -1287,6 +1287,41 @@ For important external content, create local reference notes with `type: externa
 | **Readwise** | Auto-sync to literature/ (planned) |
 | **Email/Telegram** | Capture to inbox (via n8n) |
 
+### Task Sync (DIP-0010)
+
+Bidirectional sync between org-mode and external task management tools. Org-mode serves as the internal coordination layer for AI agents; external tools provide familiar UIs for humans.
+
+**Architecture:**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      Sync Engine                             │
+│  .datacore/lib/sync/                                        │
+│  ├── engine.py      # Orchestration                         │
+│  ├── router.py      # Task routing rules                    │
+│  ├── history.py     # SQLite sync history                   │
+│  └── adapters/      # Platform-specific adapters            │
+│      ├── base.py    # TaskSyncAdapter interface             │
+│      └── github.py  # GitHub Issues (Phase 1 complete)      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Implementation Status:**
+
+| Phase | Description | Status |
+|-------|-------------|--------|
+| Phase 1 | GitHub adapter, sync engine, router | ✅ Complete |
+| Phase 2 | Conflict resolution | Planned |
+| Phase 3 | Calendar adapter | Planned |
+| Phase 4 | Additional adapters (Asana, Linear) | Future |
+
+**Key files:**
+- Tag registry: `.datacore/config/tags.yaml`
+- Tag validator: `.datacore/lib/tag_validator.py`
+- Sync command: `/sync`
+
+**See:** [DIP-0010: Task Sync Architecture](../dips/DIP-0010-task-sync-architecture.md)
+
 ### n8n Workflow Bridges
 
 ```

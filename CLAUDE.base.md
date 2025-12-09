@@ -169,7 +169,7 @@ Datacore follows documented patterns via **Datacore Improvement Proposals (DIPs)
 |-----|---------|---------|
 | [DIP-0001](dips/DIP-0001-contribution-model.md) | Contribution Model | Fork-and-overlay for privacy-safe contributions |
 | [DIP-0002](dips/DIP-0002-layered-context-pattern.md) | Layered Context | Four-level privacy for context files |
-| [DIP-0008](dips/DIP-0008-task-sync-architecture.md) | Task Sync | Bidirectional sync between org-mode and external tools |
+| [DIP-0010](dips/DIP-0010-task-sync-architecture.md) | Task Sync | Bidirectional sync between org-mode and external tools |
 | [DIP-0009](dips/DIP-0009-gtd-specification.md) | GTD Specification | Complete GTD workflow, agents, and coordination |
 
 ### Layered Context Pattern (DIP-0002)
