@@ -97,21 +97,73 @@ For each relevant space, prepare space-specific content:
 - Full session summary (primary journal)
 - All accomplishments and learnings
 - Cross-space work mentioned
+- No author attribution needed (it's your personal journal)
 
 **Team spaces (`[N]-[name]`):**
 - Only work relevant to that space
 - Files modified in that space
 - Decisions affecting that space
+- **Author attribution required** (GitHub username)
+- **Project grouping** (group entries by project)
+- **Commits and issues** when available
+
+### Step 4.5: Determine Attribution
+
+For team journals, identify:
+
+1. **Author**: The person who did the work
+   - If current user: use their GitHub username (check git config or env)
+   - If external contributor: extract from commit author or explicitly stated
+   - Default to current user if unclear
+
+2. **Project**: Group work by project
+   - Extract from file paths (e.g., `2-projects/verity/` → `Verity`)
+   - Or from explicit project mentions
+   - Use "General" if no clear project
+
+3. **Commits**: Gather relevant commit hashes
+   - From `git log` for modified files
+   - From conversation context
+
+4. **Issues**: Gather related GitHub issues
+   - From PR/issue mentions
+   - From conversation context
 
 ### Step 5: Spawn Subagents
 
 For each relevant space, spawn `journal-entry-writer` agent in parallel:
 
+**For personal space:**
+```
+Task(
+  subagent_type="journal-entry-writer",
+  prompt="""
+  Write journal entry for space: 0-personal
+
+  Session goal: {goal}
+
+  Accomplishments:
+  {accomplishments}
+
+  Files modified:
+  {files}
+
+  Continuation: {continuation_if_any}
+
+  Learnings: {learnings_if_any}
+  """
+)
+```
+
+**For team spaces (with attribution):**
 ```
 Task(
   subagent_type="journal-entry-writer",
   prompt="""
   Write journal entry for space: {space}
+
+  Author: {github_username}
+  Project: {project_name}
 
   Session goal: {goal}
 
@@ -120,6 +172,9 @@ Task(
 
   Files modified in this space:
   {space_specific_files}
+
+  Commits: {commit_hashes}
+  Issues: {issue_numbers}
 
   Continuation: {continuation_if_any}
 

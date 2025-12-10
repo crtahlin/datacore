@@ -725,6 +725,37 @@ Datacore uses two types of AI automation:
 3. **Self-contained** - All context in the definition
 4. **Composable** - Can be chained
 5. **Observable** - Output goes to files
+6. **Conversational** - Guide users through options
+
+### Conversational Command Style
+
+Module commands should be **conversational**, not CLI wrappers:
+
+**DO:**
+- Ask user what they want if intent unclear
+- Guide through options with numbered choices
+- Provide context and explanations
+- Handle errors gracefully with suggestions
+- Respect user settings for auto-actions
+
+**DON'T:**
+- Require user to memorize CLI parameters
+- Fail silently on missing arguments
+- Dump raw CLI output without formatting
+
+**Example flow:**
+```
+User: /datacortex
+Agent: "What would you like to do with your knowledge graph?"
+       1. Explore - Open visualization in browser
+       2. Stats - Show graph statistics
+       3. Find orphans - List unlinked documents
+User: 1
+Agent: "Opening graph visualization... [opens browser]"
+       "Visualization ready at http://localhost:8765"
+```
+
+**Auto-run settings:** Commands can offer `auto_*` settings in their module.yaml for power users who want to skip prompts. Example: `datacortex.auto_serve: true` skips the menu and opens the graph immediately.
 
 **Cron examples:**
 ```bash
@@ -893,16 +924,51 @@ type: journal
 ```
 
 **Team Journal** (`[N]-[name]/journal/YYYY-MM-DD.md`):
+
+Team journals aggregate work from multiple contributors, organized by project for easy scanning.
+
 ```markdown
 ---
 date: 2025-11-27
 type: team-journal
 space: datafund
+contributors: [gregor, tfius, crt]
 ---
 
-## Standup Summary
-- **Person1**: [what they worked on]
-- **Person2**: [what they worked on]
+# 2025-11-27
+
+## [Project Name]
+
+### @username - Brief Description (HH:MM)
+
+**Goal:** What they were trying to accomplish
+
+**Accomplished:**
+- Item 1
+- Item 2
+
+**Files Modified:**
+- path/to/file.ts
+
+**Commits:** `abc1234`, `def5678`
+**Issues:** #12, #13
+
+---
+
+## [Another Project]
+
+### @another_user - Their Work (HH:MM)
+...
+```
+
+**Attribution Rules:**
+- Use GitHub username with `@` prefix (e.g., `@tfius`, `@plur9`)
+- Group entries by **project first**, then by contributor
+- Include commit hashes and issue numbers when available
+- Time in parentheses is session start time (optional)
+
+**Frontmatter:**
+- `contributors`: List of GitHub usernames who contributed that day
 
 ## Key Decisions
 - [decision 1]

@@ -87,3 +87,10 @@ sync:
 journal:
   # Auto-open journal after updating
   open_after_update: false
+
+# Module: datacortex (knowledge graph visualization)
+datacortex:
+  auto_serve: false      # Auto-start server when /datacortex invoked
+  default_space: null    # Default space (null = ask user)
+  open_browser: true     # Open browser after server starts
+  port: 8765

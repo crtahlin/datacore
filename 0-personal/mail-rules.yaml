@@ -1,0 +1,36 @@
+# Personal Space Mail Rules
+# =========================
+#
+# Personal email classification rules.
+# Extends .datacore/modules/mail/rules.base.yaml (DIP-0002 pattern)
+#
+# These rules are for personal email handling.
+
+version: 1
+space: 0-personal
+description: Personal email classification rules
+
+# =============================================================================
+# SENDER RULES - Personal contacts
+# =============================================================================
+
+senders:
+  # Personal contacts (always ACTIONABLE when TO me)
+  actionable: []
+  # Add personal contacts here as needed
+  # Example:
+  #   - pattern: "family@example.com"
+  #     priority: HIGH
+  #     tags: [family]
+
+  # Research sources for personal learning
+  research: []
+  # Personal research subscriptions inherit from base
+
+# =============================================================================
+# THREAD RULES - Personal ongoing conversations
+# =============================================================================
+
+threads:
+  actionable: []
+  # Add personal thread patterns here

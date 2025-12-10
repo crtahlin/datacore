@@ -26,9 +26,13 @@ Write a structured session entry to the target space's journal file. You receive
 
 You will receive the following in your prompt:
 - **space**: Directory name (e.g., `0-personal`, `1-datafund`, `2-datacore`)
+- **author**: GitHub username of the contributor (e.g., `plur9`, `tfius`) - for team journals
+- **project**: Project name for grouping (e.g., `Verity`, `Datacortex`) - for team journals
 - **session_goal**: Brief description of session focus
 - **accomplishments**: List of what was done
 - **files_modified**: Files created or modified
+- **commits**: List of commit hashes (optional)
+- **issues**: List of GitHub issue numbers (optional)
 - **continuation**: Next steps (if incomplete)
 - **learnings**: Brief learnings captured
 
@@ -45,7 +49,7 @@ Use today's date for `YYYY-MM-DD`.
 
 ## Entry Format
 
-Append this format to the journal file:
+### Personal Journal Format (`0-personal`)
 
 ```markdown
 ---
@@ -57,23 +61,63 @@ Append this format to the journal file:
 **Accomplished:**
 - [accomplishment 1]
 - [accomplishment 2]
-- ...
 
 **Files Modified:**
 - [file 1]
 - [file 2]
-- ...
 
 [If continuation provided:]
 **Continuation:**
 - [next step 1]
-- [next step 2]
 
 [If learnings provided:]
 **Learnings:**
 - [learning 1]
-- [learning 2]
 ```
+
+### Team Journal Format (Other Spaces)
+
+Team journals use project-grouped, attributed entries:
+
+```markdown
+---
+
+## [Project Name]
+
+### @[author] - [Brief Description] (HH:MM)
+
+**Goal:** [session_goal]
+
+**Accomplished:**
+- [accomplishment 1]
+- [accomplishment 2]
+
+**Files Modified:**
+- [file 1]
+- [file 2]
+
+[If commits provided:]
+**Commits:** `abc1234`, `def5678`
+
+[If issues provided:]
+**Issues:** #12, #13
+
+[If continuation provided:]
+**Continuation:**
+- [next step 1]
+
+[If learnings provided:]
+**Learnings:**
+- [learning 1]
+```
+
+**Team Journal Rules:**
+- Group by **project** first (use `## Project Name` headers)
+- Within project, attribute to **author** (use `### @username - Description`)
+- Include GitHub username with `@` prefix
+- Link commits and issues when available
+- If adding to existing project section, append under that section
+- If new project, create new `## Project` section
 
 ## Workflow
 
@@ -112,10 +156,13 @@ For team spaces:
 type: team-journal
 date: YYYY-MM-DD
 space: [space-name]
+contributors: [author]
 ---
 
 # YYYY-MM-DD
 ```
+
+**Note:** When appending to existing team journal, update the `contributors` list in frontmatter if the author isn't already listed.
 
 ## Return Value
 
