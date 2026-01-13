@@ -1,0 +1,1 @@
+../modules/nightshift/commands/nightshift-status.md

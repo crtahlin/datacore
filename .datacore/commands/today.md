@@ -65,20 +65,60 @@ Generate under `## Daily Briefing` heading:
 - Flag any OVERDUE items
 
 ### Calendar
-[Today's calendar events from Google Calendar]
+[Today's calendar events from all configured Google Calendars]
 
-**To fetch events** (if calendar adapter enabled):
+**To fetch events from all calendars:**
 ```python
-from sync.adapters.calendar import GoogleCalendarAdapter
-adapter = GoogleCalendarAdapter(calendar_id="gregor@datafund.io")
-events = adapter.pull_events(days=1)
-for e in events:
-    print(f"  {e.timestamp.strftime('%H:%M')} | {e.title}")
+import pickle
+from datetime import datetime, timedelta
+from pathlib import Path
+from googleapiclient.discovery import build
+
+CREDS_DIR = Path('.datacore/env/credentials')
+CALENDARS = {
+    'Datafund': 'google_calendar_token.pickle',
+    'Swarm': 'google_calendar_token_ethswarm.pickle',
+    'Personal': 'google_calendar_token_gmail.pickle',
+}
+
+today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+tomorrow = today + timedelta(days=1)
+
+for name, token_file in CALENDARS.items():
+    token_path = CREDS_DIR / token_file
+    if not token_path.exists():
+        continue
+    with open(token_path, 'rb') as f:
+        creds = pickle.load(f)
+    service = build('calendar', 'v3', credentials=creds)
+    events = service.events().list(
+        calendarId='primary',
+        timeMin=today.isoformat() + 'Z',
+        timeMax=tomorrow.isoformat() + 'Z',
+        singleEvents=True,
+        orderBy='startTime'
+    ).execute().get('items', [])
+
+    if events:
+        print(f"\n**{name}:**")
+        for e in events:
+            start = e['start'].get('dateTime', e['start'].get('date'))
+            print(f"  {start[11:16]} | {e['summary']}")
 ```
 
-Or sync to org file:
-```bash
-python .datacore/lib/sync/adapters/calendar.py sync --calendar gregor@datafund.io --days 1
+**Output format in briefing:**
+```markdown
+### Calendar
+
+**Datafund:**
+- 09:00 | Daily Standup
+- 14:00 | Verity Product Call
+
+**Swarm:**
+- 11:00 | Research Sync
+
+**Personal:**
+- 18:00 | Dinner with family
 ```
 
 ### Overnight AI Work
