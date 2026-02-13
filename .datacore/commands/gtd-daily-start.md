@@ -19,6 +19,16 @@ Help the user begin their day with clarity, focus, and awareness of what needs a
 
 ## Your Workflow
 
+### Step 0: Verify Current Date
+
+**IMPORTANT**: Always run `date` command first to get the actual current date. Do NOT assume the date from previous context or conversation. The user may skip daily start/end commands on some days, so previous session context may be stale.
+
+```bash
+date
+```
+
+Use this verified date for all journal entries, scheduled tasks, and the greeting.
+
 ### Step 1: Greet and Orient
 
 ```
