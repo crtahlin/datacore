@@ -1,8 +1,16 @@
 {
   "mcpServers": {
-    "gamma": {
-      "command": "node",
-      "args": [".datacore/modules/gamma/mcp-server/dist/index.js"]
+    "datacore": {
+      "command": "npx",
+      "args": ["-y", "@datacore-one/mcp"]
+    },
+    "swarm-provenance": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm",
+        "-e", "SWARM_GATEWAY_URL=https://provenance-gateway.datafund.io",
+        "ghcr.io/datafund/swarm-provenance-mcp"
+      ]
     }
   }
 }
